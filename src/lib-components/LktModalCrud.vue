@@ -54,7 +54,8 @@ const item = ref(props.modelValue),
     perms = ref([]),
     editMode = ref(false),
     crudComponent = ref(null),
-    isLoading = ref(props.loading);
+    isLoading = ref(props.loading),
+    hasErrors = ref(false);
 
 watch(() => props.modelValue, v => item.value = v);
 watch(() => props.loading, v => isLoading.value = v);
@@ -84,6 +85,11 @@ const saveConfirm = computed(() => {
             ? props.createDisabled
             : props.updateDisabled;
     })
+
+const onReadError = (status: number) => {
+    isLoading.value = false;
+    hasErrors.value = true;
+}
 </script>
 
 <template>
@@ -109,7 +115,7 @@ const saveConfirm = computed(() => {
                   v-bind:edit-mode="editMode"></slot>
             <lkt-button
                 v-else
-                v-show="!isLoading"
+                v-show="!isLoading && !hasErrors"
                 palette="danger"
                 v-bind:disabled="dropDisabled"
                 v-bind:confirm-modal="dropConfirm"
@@ -126,7 +132,7 @@ const saveConfirm = computed(() => {
                   v-bind:edit-mode="editMode"></slot>
             <lkt-button
                 v-else
-                v-show="!isLoading"
+                v-show="!isLoading && !hasErrors"
                 palette="success"
                 v-bind:disabled="saveDisabled"
                 v-bind:confirm-modal="saveConfirm"
@@ -138,7 +144,8 @@ const saveConfirm = computed(() => {
         </template>
 
         <template v-slot:button-edition="{item}">
-            <lkt-field-switch v-show="!isLoading" v-model="editMode" :label="editModeText"></lkt-field-switch>
+            <lkt-field-switch
+                v-show="!isLoading && !hasErrors" v-model="editMode" :label="editModeText"></lkt-field-switch>
         </template>
 
         <lkt-item-crud
@@ -151,6 +158,7 @@ const saveConfirm = computed(() => {
             v-bind:drop-resource="dropResource"
             v-on:perms="(p: string[]) => perms = p"
             v-on:read="isLoading = false"
+            v-on:error="onReadError"
         >
             <template v-slot:item="{item}">
                 <slot name="item" v-bind:item="item" v-bind:edit-mode="editMode"></slot>

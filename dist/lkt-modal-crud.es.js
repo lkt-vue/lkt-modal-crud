@@ -1,7 +1,7 @@
-import { defineComponent as O, useSlots as K, ref as n, watch as v, computed as m, resolveComponent as f, openBlock as y, createBlock as b, createSlots as U, withCtx as r, unref as g, renderSlot as c, withDirectives as k, createTextVNode as V, toDisplayString as R, vShow as C, createVNode as M } from "vue";
-import { closeModal as A } from "lkt-modal";
-const E = { name: "LktModalCrud", inheritAttrs: !1 }, P = /* @__PURE__ */ O({
-  ...E,
+import { defineComponent as K, useSlots as U, ref as i, watch as y, computed as f, resolveComponent as c, openBlock as b, createBlock as g, createSlots as A, withCtx as r, unref as k, renderSlot as v, withDirectives as C, createTextVNode as R, toDisplayString as M, vShow as S, createVNode as w } from "vue";
+import { closeModal as P } from "lkt-modal";
+const F = { name: "LktModalCrud", inheritAttrs: !1 }, G = /* @__PURE__ */ K({
+  ...F,
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
     palette: { type: String, default: "" },
@@ -35,15 +35,17 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, P = /* @__PURE__ */ O({
     dropDisabled: { type: Boolean, default: !1 }
   },
   emits: ["update:modelValue", "read", "created", "updated", "dropped", "perms"],
-  setup(e, { emit: S }) {
-    const t = e, p = K(), w = S, i = n(t.modelValue), x = n([]), u = n(!1), B = n(null), d = n(t.loading);
-    v(() => t.modelValue, (o) => i.value = o), v(() => t.loading, (o) => d.value = o), v(i, () => w("update:modelValue", i.value));
-    const q = () => {
-      A(t.modalName, t.modalKey);
-    }, T = m(() => t.saveIsCreate ? t.createConfirm : t.updateConfirm), $ = m(() => t.saveIsCreate ? t.createResource : t.updateResource), z = m(() => t.saveIsCreate ? t.createData : t.updateData), I = m(() => t.saveIsCreate ? t.createDisabled : t.updateDisabled);
+  setup(e, { emit: D }) {
+    const t = e, p = U(), x = D, s = i(t.modelValue), B = i([]), u = i(!1), q = i(null), d = i(t.loading), m = i(!1);
+    y(() => t.modelValue, (o) => s.value = o), y(() => t.loading, (o) => d.value = o), y(s, () => x("update:modelValue", s.value));
+    const T = () => {
+      P(t.modalName, t.modalKey);
+    }, $ = f(() => t.saveIsCreate ? t.createConfirm : t.updateConfirm), z = f(() => t.saveIsCreate ? t.createResource : t.updateResource), I = f(() => t.saveIsCreate ? t.createData : t.updateData), L = f(() => t.saveIsCreate ? t.createDisabled : t.updateDisabled), N = (o) => {
+      d.value = !1, m.value = !0;
+    };
     return (o, a) => {
-      const D = f("lkt-button"), L = f("lkt-field-switch"), N = f("lkt-item-crud"), j = f("lkt-modal");
-      return y(), b(j, {
+      const V = c("lkt-button"), j = c("lkt-field-switch"), O = c("lkt-item-crud"), E = c("lkt-modal");
+      return b(), g(E, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -55,78 +57,79 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, P = /* @__PURE__ */ O({
         "show-close": e.showClose,
         "disabled-close": e.disabledClose,
         "disabled-veil-click": e.disabledVeilClick
-      }, U({
+      }, A({
         "button-drop": r(({ item: l }) => [
-          g(p)["button-drop"] ? c(o.$slots, "button-drop", {
+          k(p)["button-drop"] ? v(o.$slots, "button-drop", {
             key: 0,
             item: l,
             editMode: u.value
-          }) : k((y(), b(D, {
+          }) : C((b(), g(V, {
             key: 1,
             palette: "danger",
             disabled: e.dropDisabled,
             "confirm-modal": e.dropConfirm,
             resource: e.dropResource,
             "resource-data": e.dropData,
-            onLoading: a[0] || (a[0] = (s) => d.value = !0),
-            onLoaded: a[1] || (a[1] = (s) => d.value = !1),
-            onClick: q
+            onLoading: a[0] || (a[0] = (n) => d.value = !0),
+            onLoaded: a[1] || (a[1] = (n) => d.value = !1),
+            onClick: T
           }, {
             default: r(() => [
-              V(R(e.dropText), 1)
+              R(M(e.dropText), 1)
             ]),
             _: 1
           }, 8, ["disabled", "confirm-modal", "resource", "resource-data"])), [
-            [C, !d.value]
+            [S, !d.value && !m.value]
           ])
         ]),
         "button-save": r(({ item: l }) => [
-          g(p)["button-save"] ? c(o.$slots, "button-save", {
+          k(p)["button-save"] ? v(o.$slots, "button-save", {
             key: 0,
             item: l,
             editMode: u.value
-          }) : k((y(), b(D, {
+          }) : C((b(), g(V, {
             key: 1,
             palette: "success",
-            disabled: I.value,
-            "confirm-modal": T.value,
-            resource: $.value,
-            "resource-data": z.value,
-            onLoading: a[2] || (a[2] = (s) => d.value = !0),
-            onLoaded: a[3] || (a[3] = (s) => d.value = !1)
+            disabled: L.value,
+            "confirm-modal": $.value,
+            resource: z.value,
+            "resource-data": I.value,
+            onLoading: a[2] || (a[2] = (n) => d.value = !0),
+            onLoaded: a[3] || (a[3] = (n) => d.value = !1)
           }, {
             default: r(() => [
-              V(R(e.saveText), 1)
+              R(M(e.saveText), 1)
             ]),
             _: 1
           }, 8, ["disabled", "confirm-modal", "resource", "resource-data"])), [
-            [C, !d.value]
+            [S, !d.value && !m.value]
           ])
         ]),
         "button-edition": r(({ item: l }) => [
-          k(M(L, {
+          C(w(j, {
             modelValue: u.value,
-            "onUpdate:modelValue": a[4] || (a[4] = (s) => u.value = s),
+            "onUpdate:modelValue": a[4] || (a[4] = (n) => u.value = n),
             label: e.editModeText
           }, null, 8, ["modelValue", "label"]), [
-            [C, !d.value]
+            [S, !d.value && !m.value]
           ])
         ]),
         default: r(() => [
-          M(N, {
-            ref: (l) => B.value = l,
-            modelValue: i.value,
-            "onUpdate:modelValue": a[5] || (a[5] = (l) => i.value = l),
+          w(O, {
+            ref: (l) => q.value = l,
+            modelValue: s.value,
+            "onUpdate:modelValue": a[5] || (a[5] = (l) => s.value = l),
             "read-resource": e.readResource,
             "read-data": e.readData,
             "create-resource": e.createResource,
             "update-resource": e.updateResource,
             "drop-resource": e.dropResource,
-            onPerms: a[6] || (a[6] = (l) => x.value = l),
-            onRead: a[7] || (a[7] = (l) => d.value = !1)
+            onPerms: a[6] || (a[6] = (l) => B.value = l),
+            onRead: a[7] || (a[7] = (l) => d.value = !1),
+            onError: N
           }, {
             item: r(({ item: l }) => [
-              c(o.$slots, "item", {
+              v(o.$slots, "item", {
                 item: l,
                 editMode: u.value
               })
@@ -136,10 +139,10 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, P = /* @__PURE__ */ O({
         ]),
         _: 2
       }, [
-        g(p)["pre-title"] ? {
+        k(p)["pre-title"] ? {
           name: "pre-title",
           fn: r(({ item: l }) => [
-            c(o.$slots, "pre-title", {
+            v(o.$slots, "pre-title", {
               item: l,
               editMode: u.value
             })
@@ -149,11 +152,11 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, P = /* @__PURE__ */ O({
       ]), 1032, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "loading", "show-close", "disabled-close", "disabled-veil-click"]);
     };
   }
-}), H = {
-  install: (e, S) => {
-    e.component("lkt-modal-crud", P);
+}), Q = {
+  install: (e, D) => {
+    e.component("lkt-modal-crud", G);
   }
 };
 export {
-  H as default
+  Q as default
 };
