@@ -61,6 +61,14 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
+        editedCloseConfirm: {
+            type: StringConstructor;
+            default: string;
+        };
+        editedCloseConfirmKey: {
+            type: (StringConstructor | NumberConstructor)[];
+            default: string;
+        };
         readResource: {
             type: StringConstructor;
             required: true;
@@ -194,6 +202,14 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
+        editedCloseConfirm: {
+            type: StringConstructor;
+            default: string;
+        };
+        editedCloseConfirmKey: {
+            type: (StringConstructor | NumberConstructor)[];
+            default: string;
+        };
         readResource: {
             type: StringConstructor;
             required: true;
@@ -281,6 +297,8 @@ declare const _default: {
         editModeText: string;
         saveText: string;
         dropText: string;
+        editedCloseConfirm: string;
+        editedCloseConfirmKey: string | number;
         readData: Record<string, any>;
         createData: Record<string, any>;
         updateData: Record<string, any>;
@@ -359,6 +377,14 @@ declare const _default: {
         };
         dropText: {
             type: StringConstructor;
+            default: string;
+        };
+        editedCloseConfirm: {
+            type: StringConstructor;
+            default: string;
+        };
+        editedCloseConfirmKey: {
+            type: (StringConstructor | NumberConstructor)[];
             default: string;
         };
         readResource: {
@@ -448,6 +474,8 @@ declare const _default: {
         editModeText: string;
         saveText: string;
         dropText: string;
+        editedCloseConfirm: string;
+        editedCloseConfirmKey: string | number;
         readData: Record<string, any>;
         createData: Record<string, any>;
         updateData: Record<string, any>;
@@ -523,6 +551,14 @@ declare const _default: {
     };
     dropText: {
         type: StringConstructor;
+        default: string;
+    };
+    editedCloseConfirm: {
+        type: StringConstructor;
+        default: string;
+    };
+    editedCloseConfirmKey: {
+        type: (StringConstructor | NumberConstructor)[];
         default: string;
     };
     readResource: {
@@ -612,6 +648,8 @@ declare const _default: {
     editModeText: string;
     saveText: string;
     dropText: string;
+    editedCloseConfirm: string;
+    editedCloseConfirmKey: string | number;
     readData: Record<string, any>;
     createData: Record<string, any>;
     updateData: Record<string, any>;
@@ -629,17 +667,10 @@ declare const _default: {
             item: any;
             editMode: boolean;
         }) => any;
-        'button-drop': (_: {
-            item: any;
-            editMode: boolean;
-        }) => any;
-        'button-save': (_: {
-            item: any;
-            editMode: boolean;
-        }) => any;
         item: (_: {
             item: any;
-            editMode: boolean;
+            loading: any;
+            editMode: any;
         }) => any;
     };
 });

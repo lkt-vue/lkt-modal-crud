@@ -4,7 +4,6 @@ export default {name: 'LktModalCrud', inheritAttrs: false};
 
 <script setup lang="ts">
 import {computed, ref, useSlots, watch} from "vue";
-import {closeModal} from "lkt-modal";
 
 const props = defineProps({
     modelValue: {type: Object, required: false, default: () => ({})},
@@ -23,6 +22,9 @@ const props = defineProps({
     editModeText: {type: String, default: 'Edition Mode'},
     saveText: {type: String, default: 'Save'},
     dropText: {type: String, default: 'Delete'},
+
+    editedCloseConfirm: {type: String, default: ''},
+    editedCloseConfirmKey: {type: [String, Number], default: '_'},
 
     readResource: {type: String, required: true},
     createResource: {type: String, required: false},
@@ -55,41 +57,32 @@ const item = ref(props.modelValue),
     editMode = ref(false),
     crudComponent = ref(null),
     isLoading = ref(props.loading),
-    hasErrors = ref(false);
+    hasErrors = ref(false),
+    hasModifiedData = ref(false);
 
-watch(() => props.modelValue, v => item.value = v);
+watch(() => props.modelValue, v => {
+    item.value = v
+});
 watch(() => props.loading, v => isLoading.value = v);
-watch(item, () => emit('update:modelValue', item.value));
-
-const onDrop = () => {
-    closeModal(props.modalName, props.modalKey);
-};
-
-const saveConfirm = computed(() => {
-        return props.saveIsCreate
-            ? props.createConfirm
-            : props.updateConfirm;
-    }),
-    saveResource = computed(() => {
-        return props.saveIsCreate
-            ? props.createResource
-            : props.updateResource;
-    }),
-    saveData = computed(() => {
-        return props.saveIsCreate
-            ? props.createData
-            : props.updateData;
-    }),
-    saveDisabled = computed(() => {
-        return props.saveIsCreate
-            ? props.createDisabled
-            : props.updateDisabled;
-    })
+watch(item, (v) => {
+    emit('update:modelValue', v)
+}, {deep: true});
 
 const onReadError = (status: number) => {
-    isLoading.value = false;
-    hasErrors.value = true;
-}
+        isLoading.value = false;
+        hasErrors.value = true;
+    },
+    onRead = (r: any) => {
+        isLoading.value = false;
+        emit('read', r)
+    },
+    onModifiedData = (v: boolean) => {
+        hasModifiedData.value = v;
+    };
+
+const closeConfirm = computed(() => {
+    return hasModifiedData.value ? props.editedCloseConfirm : '';
+})
 </script>
 
 <template>
@@ -104,64 +97,36 @@ const onReadError = (status: number) => {
                v-bind:show-close="showClose"
                v-bind:disabled-close="disabledClose"
                v-bind:disabled-veil-click="disabledVeilClick"
+               v-bind:close-confirm="closeConfirm"
+               v-bind:close-confirm-key="editedCloseConfirmKey"
     >
 
         <template v-if="!!slots['pre-title']" v-slot:pre-title="{item}">
             <slot name="pre-title" v-bind:item="item" v-bind:edit-mode="editMode"></slot>
         </template>
 
-        <template v-slot:button-drop="{item}">
-            <slot v-if="!!slots['button-drop']" name="button-drop" v-bind:item="item"
-                  v-bind:edit-mode="editMode"></slot>
-            <lkt-button
-                v-else
-                v-show="!isLoading && !hasErrors"
-                palette="danger"
-                v-bind:disabled="dropDisabled"
-                v-bind:confirm-modal="dropConfirm"
-                v-bind:resource="dropResource"
-                v-bind:resource-data="dropData"
-                v-on:loading="isLoading = true"
-                v-on:loaded="isLoading = false"
-                v-on:click="onDrop">{{dropText}}
-            </lkt-button>
-        </template>
-
-        <template v-slot:button-save="{item}">
-            <slot v-if="!!slots['button-save']" name="button-save" v-bind:item="item"
-                  v-bind:edit-mode="editMode"></slot>
-            <lkt-button
-                v-else
-                v-show="!isLoading && !hasErrors"
-                palette="success"
-                v-bind:disabled="saveDisabled"
-                v-bind:confirm-modal="saveConfirm"
-                v-bind:resource="saveResource"
-                v-bind:resource-data="saveData"
-                v-on:loading="isLoading = true"
-                v-on:loaded="isLoading = false">{{saveText}}
-            </lkt-button>
-        </template>
-
-        <template v-slot:button-edition="{item}">
-            <lkt-field-switch
-                v-show="!isLoading && !hasErrors" v-model="editMode" :label="editModeText"></lkt-field-switch>
-        </template>
-
         <lkt-item-crud
             :ref="(el:any) => crudComponent = el"
             v-model="item"
+            v-bind:create-resource="createResource"
+            v-on:perms="(p: string[]) => perms = p"
+            v-on:read="onRead"
+            v-on:error="onReadError"
+            v-on:modified-data="onModifiedData"
             v-bind:read-resource="readResource"
             v-bind:read-data="readData"
-            v-bind:create-resource="createResource"
-            v-bind:update-resource="updateResource"
+            v-bind:drop-confirm="dropConfirm"
             v-bind:drop-resource="dropResource"
-            v-on:perms="(p: string[]) => perms = p"
-            v-on:read="isLoading = false"
-            v-on:error="onReadError"
+            v-bind:drop-data="dropData"
+            v-bind:update-confirm="updateConfirm"
+            v-bind:update-resource="updateResource"
+            v-bind:update-data="updateData"
+            v-bind:drop-disabled="dropDisabled"
+            v-bind:create-disabled="createDisabled"
+            v-bind:update-disabled="updateDisabled"
         >
-            <template v-slot:item="{item}">
-                <slot name="item" v-bind:item="item" v-bind:edit-mode="editMode"></slot>
+            <template v-slot:item="{item, editMode, loading}">
+                <slot name="item" v-bind:item="item" v-bind:loading="loading" v-bind:edit-mode="editMode"></slot>
             </template>
         </lkt-item-crud>
     </lkt-modal>
