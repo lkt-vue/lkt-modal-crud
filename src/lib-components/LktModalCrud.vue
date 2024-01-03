@@ -11,7 +11,6 @@ const props = defineProps({
     size: {type: String, default: ''},
     preTitle: {type: String, default: ''},
     title: {type: String, default: ''},
-    loading: {type: Boolean, default: true},
     showClose: {type: Boolean, default: true},
     disabledClose: {type: Boolean, default: false},
     disabledVeilClick: {type: Boolean, default: false},
@@ -36,7 +35,7 @@ const props = defineProps({
     updateData: {type: Object, required: false, default: () => ({})},
     dropData: {type: Object, required: false, default: () => ({})},
 
-    saveIsCreate: {type: Boolean, default: false},
+    isCreate: {type: Boolean, default: false},
     createConfirm: {type: String, default: ''},
     updateConfirm: {type: String, default: ''},
     dropConfirm: {type: String, default: ''},
@@ -45,40 +44,27 @@ const props = defineProps({
     updateDisabled: {type: Boolean, default: false},
     dropDisabled: {type: Boolean, default: false},
 
+    saveValidator: {type: Function, required: false, default: () => true},
+
 });
 
 const slots = useSlots();
 
 const emit = defineEmits(['update:modelValue', 'read', 'created', 'updated', 'dropped', 'perms']);
 
-
 const item = ref(props.modelValue),
     perms = ref([]),
     editMode = ref(false),
     crudComponent = ref(null),
-    isLoading = ref(props.loading),
     hasErrors = ref(false),
     hasModifiedData = ref(false);
 
-watch(() => props.modelValue, v => {
-    item.value = v
-});
-watch(() => props.loading, v => isLoading.value = v);
-watch(item, (v) => {
-    emit('update:modelValue', v)
-}, {deep: true});
+watch(() => props.modelValue, v => item.value = v);
+watch(item, (v) => emit('update:modelValue', v), {deep: true});
 
-const onReadError = (status: number) => {
-        isLoading.value = false;
-        hasErrors.value = true;
-    },
-    onRead = (r: any) => {
-        isLoading.value = false;
-        emit('read', r)
-    },
-    onModifiedData = (v: boolean) => {
-        hasModifiedData.value = v;
-    };
+const onReadError = (status: number) => hasErrors.value = true,
+    onRead = (r: any) => emit('read', r),
+    onModifiedData = (v: boolean) => hasModifiedData.value = v;
 
 const closeConfirm = computed(() => {
     return hasModifiedData.value ? props.editedCloseConfirm : '';
@@ -93,7 +79,6 @@ const closeConfirm = computed(() => {
                v-bind:z-index="zIndex"
                v-bind:palette="palette"
                v-bind:size="size"
-               v-bind:loading="isLoading"
                v-bind:show-close="showClose"
                v-bind:disabled-close="disabledClose"
                v-bind:disabled-veil-click="disabledVeilClick"
@@ -124,6 +109,8 @@ const closeConfirm = computed(() => {
             v-bind:drop-disabled="dropDisabled"
             v-bind:create-disabled="createDisabled"
             v-bind:update-disabled="updateDisabled"
+            v-bind:is-create="isCreate"
+            v-bind:save-validator="saveValidator"
         >
             <template v-slot:item="{item, editMode, loading}">
                 <slot name="item" v-bind:item="item" v-bind:loading="loading" v-bind:edit-mode="editMode"></slot>

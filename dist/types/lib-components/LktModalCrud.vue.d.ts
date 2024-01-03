@@ -21,10 +21,6 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
-        loading: {
-            type: BooleanConstructor;
-            default: boolean;
-        };
         showClose: {
             type: BooleanConstructor;
             default: boolean;
@@ -105,7 +101,7 @@ declare const _default: {
             required: false;
             default: () => {};
         };
-        saveIsCreate: {
+        isCreate: {
             type: BooleanConstructor;
             default: boolean;
         };
@@ -132,6 +128,11 @@ declare const _default: {
         dropDisabled: {
             type: BooleanConstructor;
             default: boolean;
+        };
+        saveValidator: {
+            type: FunctionConstructor;
+            required: false;
+            default: () => boolean;
         };
     }>> & {
         onUpdated?: (...args: any[]) => any;
@@ -162,10 +163,6 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
-        loading: {
-            type: BooleanConstructor;
-            default: boolean;
-        };
         showClose: {
             type: BooleanConstructor;
             default: boolean;
@@ -246,7 +243,7 @@ declare const _default: {
             required: false;
             default: () => {};
         };
-        saveIsCreate: {
+        isCreate: {
             type: BooleanConstructor;
             default: boolean;
         };
@@ -274,6 +271,11 @@ declare const _default: {
             type: BooleanConstructor;
             default: boolean;
         };
+        saveValidator: {
+            type: FunctionConstructor;
+            required: false;
+            default: () => boolean;
+        };
     }>> & {
         onUpdated?: (...args: any[]) => any;
         onCreated?: (...args: any[]) => any;
@@ -283,7 +285,6 @@ declare const _default: {
         onPerms?: (...args: any[]) => any;
     }, {
         zIndex: number;
-        loading: boolean;
         title: string;
         size: string;
         modelValue: Record<string, any>;
@@ -303,13 +304,14 @@ declare const _default: {
         createData: Record<string, any>;
         updateData: Record<string, any>;
         dropData: Record<string, any>;
-        saveIsCreate: boolean;
+        isCreate: boolean;
         createConfirm: string;
         updateConfirm: string;
         dropConfirm: string;
         createDisabled: boolean;
         updateDisabled: boolean;
         dropDisabled: boolean;
+        saveValidator: Function;
     }, true, {}, {}, {
         P: {};
         B: {};
@@ -339,10 +341,6 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
-        loading: {
-            type: BooleanConstructor;
-            default: boolean;
-        };
         showClose: {
             type: BooleanConstructor;
             default: boolean;
@@ -423,7 +421,7 @@ declare const _default: {
             required: false;
             default: () => {};
         };
-        saveIsCreate: {
+        isCreate: {
             type: BooleanConstructor;
             default: boolean;
         };
@@ -451,6 +449,11 @@ declare const _default: {
             type: BooleanConstructor;
             default: boolean;
         };
+        saveValidator: {
+            type: FunctionConstructor;
+            required: false;
+            default: () => boolean;
+        };
     }>> & {
         onUpdated?: (...args: any[]) => any;
         onCreated?: (...args: any[]) => any;
@@ -460,7 +463,6 @@ declare const _default: {
         onPerms?: (...args: any[]) => any;
     }, {}, {}, {}, {}, {
         zIndex: number;
-        loading: boolean;
         title: string;
         size: string;
         modelValue: Record<string, any>;
@@ -480,13 +482,14 @@ declare const _default: {
         createData: Record<string, any>;
         updateData: Record<string, any>;
         dropData: Record<string, any>;
-        saveIsCreate: boolean;
+        isCreate: boolean;
         createConfirm: string;
         updateConfirm: string;
         dropConfirm: string;
         createDisabled: boolean;
         updateDisabled: boolean;
         dropDisabled: boolean;
+        saveValidator: Function;
     }>;
     __isFragment?: never;
     __isTeleport?: never;
@@ -512,10 +515,6 @@ declare const _default: {
     title: {
         type: StringConstructor;
         default: string;
-    };
-    loading: {
-        type: BooleanConstructor;
-        default: boolean;
     };
     showClose: {
         type: BooleanConstructor;
@@ -597,7 +596,7 @@ declare const _default: {
         required: false;
         default: () => {};
     };
-    saveIsCreate: {
+    isCreate: {
         type: BooleanConstructor;
         default: boolean;
     };
@@ -625,6 +624,11 @@ declare const _default: {
         type: BooleanConstructor;
         default: boolean;
     };
+    saveValidator: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => boolean;
+    };
 }>> & {
     onUpdated?: (...args: any[]) => any;
     onCreated?: (...args: any[]) => any;
@@ -634,7 +638,6 @@ declare const _default: {
     onPerms?: (...args: any[]) => any;
 }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("created" | "updated" | "update:modelValue" | "read" | "dropped" | "perms")[], "created" | "updated" | "update:modelValue" | "read" | "dropped" | "perms", {
     zIndex: number;
-    loading: boolean;
     title: string;
     size: string;
     modelValue: Record<string, any>;
@@ -654,13 +657,14 @@ declare const _default: {
     createData: Record<string, any>;
     updateData: Record<string, any>;
     dropData: Record<string, any>;
-    saveIsCreate: boolean;
+    isCreate: boolean;
     createConfirm: string;
     updateConfirm: string;
     dropConfirm: string;
     createDisabled: boolean;
     updateDisabled: boolean;
     dropDisabled: boolean;
+    saveValidator: Function;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & (new () => {
     $slots: {
         'pre-title': (_: {
