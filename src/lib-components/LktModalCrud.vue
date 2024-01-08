@@ -64,7 +64,11 @@ watch(item, (v) => emit('update:modelValue', v), {deep: true});
 
 const onReadError = (status: number) => hasErrors.value = true,
     onRead = (r: any) => emit('read', r),
-    onModifiedData = (v: boolean) => hasModifiedData.value = v;
+    onModifiedData = (v: boolean) => hasModifiedData.value = v,
+    onPerms = (p: string[]) => {
+        perms.value = p;
+        emit('perms', p);
+    };
 
 const closeConfirm = computed(() => {
     return hasModifiedData.value ? props.editedCloseConfirm : '';
@@ -94,7 +98,7 @@ const closeConfirm = computed(() => {
             :ref="(el:any) => crudComponent = el"
             v-model="item"
             v-bind:create-resource="createResource"
-            v-on:perms="(p: string[]) => perms = p"
+            v-on:perms="onPerms"
             v-on:read="onRead"
             v-on:error="onReadError"
             v-on:modified-data="onModifiedData"

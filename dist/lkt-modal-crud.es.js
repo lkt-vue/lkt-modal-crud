@@ -1,6 +1,6 @@
-import { defineComponent as B, useSlots as x, ref as d, watch as c, computed as z, resolveComponent as f, openBlock as h, createBlock as w, createSlots as N, withCtx as i, createVNode as j, renderSlot as m, unref as O } from "vue";
-const T = { name: "LktModalCrud", inheritAttrs: !1 }, E = /* @__PURE__ */ B({
-  ...T,
+import { defineComponent as h, useSlots as x, ref as d, watch as c, computed as z, resolveComponent as f, openBlock as w, createBlock as N, createSlots as j, withCtx as i, createVNode as O, renderSlot as m, unref as T } from "vue";
+const E = { name: "LktModalCrud", inheritAttrs: !1 }, K = /* @__PURE__ */ h({
+  ...E,
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
     palette: { type: String, default: "" },
@@ -37,12 +37,14 @@ const T = { name: "LktModalCrud", inheritAttrs: !1 }, E = /* @__PURE__ */ B({
   },
   emits: ["update:modelValue", "read", "created", "updated", "dropped", "perms"],
   setup(e, { emit: u }) {
-    const o = e, p = x(), s = u, l = d(o.modelValue), y = d([]), b = d(!1), C = d(null), v = d(!1), n = d(!1);
-    c(() => o.modelValue, (t) => l.value = t), c(l, (t) => s("update:modelValue", t), { deep: !0 });
-    const S = (t) => v.value = !0, g = (t) => s("read", t), k = (t) => n.value = t, D = z(() => n.value ? o.editedCloseConfirm : "");
-    return (t, r) => {
-      const V = f("lkt-item-crud"), q = f("lkt-modal");
-      return h(), w(q, {
+    const r = e, p = x(), o = u, l = d(r.modelValue), y = d([]), b = d(!1), C = d(null), v = d(!1), s = d(!1);
+    c(() => r.modelValue, (t) => l.value = t), c(l, (t) => o("update:modelValue", t), { deep: !0 });
+    const S = (t) => v.value = !0, g = (t) => o("read", t), k = (t) => s.value = t, D = (t) => {
+      y.value = t, o("perms", t);
+    }, V = z(() => s.value ? r.editedCloseConfirm : "");
+    return (t, n) => {
+      const q = f("lkt-item-crud"), M = f("lkt-modal");
+      return w(), N(M, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -53,16 +55,16 @@ const T = { name: "LktModalCrud", inheritAttrs: !1 }, E = /* @__PURE__ */ B({
         "show-close": e.showClose,
         "disabled-close": e.disabledClose,
         "disabled-veil-click": e.disabledVeilClick,
-        "close-confirm": D.value,
+        "close-confirm": V.value,
         "close-confirm-key": e.editedCloseConfirmKey
-      }, N({
+      }, j({
         default: i(() => [
-          j(V, {
+          O(q, {
             ref: (a) => C.value = a,
             modelValue: l.value,
-            "onUpdate:modelValue": r[0] || (r[0] = (a) => l.value = a),
+            "onUpdate:modelValue": n[0] || (n[0] = (a) => l.value = a),
             "create-resource": e.createResource,
-            onPerms: r[1] || (r[1] = (a) => y.value = a),
+            onPerms: D,
             onRead: g,
             onError: S,
             onModifiedData: k,
@@ -80,11 +82,11 @@ const T = { name: "LktModalCrud", inheritAttrs: !1 }, E = /* @__PURE__ */ B({
             "is-create": e.isCreate,
             "save-validator": e.saveValidator
           }, {
-            item: i(({ item: a, editMode: M, loading: R }) => [
+            item: i(({ item: a, editMode: R, loading: B }) => [
               m(t.$slots, "item", {
                 item: a,
-                loading: R,
-                editMode: M
+                loading: B,
+                editMode: R
               })
             ]),
             _: 3
@@ -92,7 +94,7 @@ const T = { name: "LktModalCrud", inheritAttrs: !1 }, E = /* @__PURE__ */ B({
         ]),
         _: 2
       }, [
-        O(p)["pre-title"] ? {
+        T(p)["pre-title"] ? {
           name: "pre-title",
           fn: i(({ item: a }) => [
             m(t.$slots, "pre-title", {
@@ -105,11 +107,11 @@ const T = { name: "LktModalCrud", inheritAttrs: !1 }, E = /* @__PURE__ */ B({
       ]), 1032, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
     };
   }
-}), I = {
+}), L = {
   install: (e, u) => {
-    e.component("lkt-modal-crud", E);
+    e.component("lkt-modal-crud", K);
   }
 };
 export {
-  I as default
+  L as default
 };
