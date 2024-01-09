@@ -1,5 +1,5 @@
-import { defineComponent as N, useSlots as j, ref as d, watch as c, computed as x, resolveComponent as f, openBlock as O, createBlock as T, createSlots as E, withCtx as i, createVNode as K, renderSlot as m, unref as U } from "vue";
-const I = { name: "LktModalCrud", inheritAttrs: !1 }, L = /* @__PURE__ */ N({
+import { defineComponent as z, useSlots as w, ref as d, watch as b, computed as N, resolveComponent as C, openBlock as j, createBlock as O, createSlots as T, withCtx as f, createVNode as E, renderSlot as S, unref as K } from "vue";
+const I = { name: "LktModalCrud", inheritAttrs: !1 }, L = /* @__PURE__ */ z({
   ...I,
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
@@ -36,15 +36,17 @@ const I = { name: "LktModalCrud", inheritAttrs: !1 }, L = /* @__PURE__ */ N({
     saveValidator: { type: Function, required: !1, default: () => !0 }
   },
   emits: ["update:modelValue", "read", "created", "updated", "dropped", "perms"],
-  setup(e, { emit: u }) {
-    const r = e, p = j(), o = u, l = d(r.modelValue), y = d([]), C = d(!1), b = d(null), v = d(!1), s = d(!1);
-    c(() => r.modelValue, (t) => l.value = t), c(l, (t) => o("update:modelValue", t), { deep: !0 });
-    const S = (t) => v.value = !0, g = (t) => o("read", t), k = (t) => s.value = t, D = (t) => {
-      y.value = t, o("perms", t);
-    }, V = x(() => s.value ? r.editedCloseConfirm : "");
-    return (t, n) => {
-      const q = f("lkt-item-crud"), M = f("lkt-modal");
-      return O(), T(M, {
+  setup(e, { emit: m }) {
+    const r = e, v = w(), o = m, l = d(r.modelValue), g = d([]);
+    d(!1);
+    const k = d(null), D = d(!1), p = d(!1);
+    b(() => r.modelValue, (t) => l.value = t), b(l, (t) => o("update:modelValue", t), { deep: !0 });
+    const V = (t) => D.value = !0, q = (t) => o("read", t), M = (t) => p.value = t, R = (t) => {
+      g.value = t, o("perms", t);
+    }, B = N(() => p.value ? r.editedCloseConfirm : "");
+    return (t, y) => {
+      const h = C("lkt-item-crud"), x = C("lkt-modal");
+      return j(), O(x, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -55,19 +57,19 @@ const I = { name: "LktModalCrud", inheritAttrs: !1 }, L = /* @__PURE__ */ N({
         "show-close": e.showClose,
         "disabled-close": e.disabledClose,
         "disabled-veil-click": e.disabledVeilClick,
-        "close-confirm": V.value,
+        "close-confirm": B.value,
         "close-confirm-key": e.editedCloseConfirmKey
-      }, E({
-        default: i(() => [
-          K(q, {
-            ref: (a) => b.value = a,
+      }, T({
+        default: f(() => [
+          E(h, {
+            ref: (a) => k.value = a,
             modelValue: l.value,
-            "onUpdate:modelValue": n[0] || (n[0] = (a) => l.value = a),
+            "onUpdate:modelValue": y[0] || (y[0] = (a) => l.value = a),
             "create-resource": e.createResource,
-            onPerms: D,
-            onRead: g,
-            onError: S,
-            onModifiedData: k,
+            onPerms: R,
+            onRead: q,
+            onError: V,
+            onModifiedData: M,
             "read-resource": e.readResource,
             "read-data": e.readData,
             "drop-confirm": e.dropConfirm,
@@ -82,14 +84,14 @@ const I = { name: "LktModalCrud", inheritAttrs: !1 }, L = /* @__PURE__ */ N({
             "is-create": e.isCreate,
             "save-validator": e.saveValidator
           }, {
-            item: i(({ item: a, editMode: R, loading: B, isCreate: h, canUpdate: z, canDrop: w }) => [
-              m(t.$slots, "item", {
+            item: f(({ item: a, editMode: i, loading: u, isCreate: s, canUpdate: n, canDrop: c }) => [
+              S(t.$slots, "item", {
                 item: a,
-                loading: B,
-                editMode: R,
-                isCreate: h,
-                canUpdate: z,
-                canDrop: w
+                loading: u,
+                editMode: i,
+                isCreate: s,
+                canUpdate: n,
+                canDrop: c
               })
             ]),
             _: 3
@@ -97,16 +99,16 @@ const I = { name: "LktModalCrud", inheritAttrs: !1 }, L = /* @__PURE__ */ N({
         ]),
         _: 2
       }, [
-        U(p)["pre-title"] ? {
+        K(v)["pre-title"] ? {
           name: "pre-title",
-          fn: i(({ item: a }) => [
-            m(t.$slots, "pre-title", {
+          fn: f(({ item: a, loading: i, editMode: u, isCreate: s, canUpdate: n, canDrop: c }) => [
+            S(t.$slots, "pre-title", {
               item: a,
-              loading: t.loading,
-              editMode: C.value,
-              isCreate: e.isCreate,
-              canUpdate: t.canUpdate,
-              canDrop: t.canDrop
+              loading: i,
+              editMode: u,
+              isCreate: s,
+              canUpdate: n,
+              canDrop: c
             })
           ]),
           key: "0"
@@ -115,7 +117,7 @@ const I = { name: "LktModalCrud", inheritAttrs: !1 }, L = /* @__PURE__ */ N({
     };
   }
 }), A = {
-  install: (e, u) => {
+  install: (e, m) => {
     e.component("lkt-modal-crud", L);
   }
 };

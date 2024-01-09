@@ -670,8 +670,8 @@ declare const _default: {
         'pre-title': (_: {
             item: any;
             loading: any;
-            editMode: boolean;
-            isCreate: boolean;
+            editMode: any;
+            isCreate: any;
             canUpdate: any;
             canDrop: any;
         }) => any;
