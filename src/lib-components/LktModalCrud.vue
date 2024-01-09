@@ -90,7 +90,7 @@ const closeConfirm = computed(() => {
                v-bind:close-confirm-key="editedCloseConfirmKey"
     >
 
-        <template v-if="!!slots['pre-title']" v-slot:pre-title="{item}">
+        <template v-if="!!slots['pre-title']" v-slot:pre-title="{item, loading, editMode, isCreate, canUpdate, canDrop}">
             <slot
                 name="pre-title"
                 v-bind:item="item"
