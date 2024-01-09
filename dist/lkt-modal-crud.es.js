@@ -1,6 +1,6 @@
-import { defineComponent as h, useSlots as x, ref as d, watch as c, computed as z, resolveComponent as f, openBlock as w, createBlock as N, createSlots as j, withCtx as i, createVNode as O, renderSlot as m, unref as T } from "vue";
-const E = { name: "LktModalCrud", inheritAttrs: !1 }, K = /* @__PURE__ */ h({
-  ...E,
+import { defineComponent as N, useSlots as j, ref as d, watch as c, computed as x, resolveComponent as f, openBlock as O, createBlock as T, createSlots as E, withCtx as i, createVNode as K, renderSlot as m, unref as U } from "vue";
+const I = { name: "LktModalCrud", inheritAttrs: !1 }, L = /* @__PURE__ */ N({
+  ...I,
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
     palette: { type: String, default: "" },
@@ -37,14 +37,14 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, K = /* @__PURE__ */ h({
   },
   emits: ["update:modelValue", "read", "created", "updated", "dropped", "perms"],
   setup(e, { emit: u }) {
-    const r = e, p = x(), o = u, l = d(r.modelValue), y = d([]), b = d(!1), C = d(null), v = d(!1), s = d(!1);
+    const r = e, p = j(), o = u, l = d(r.modelValue), y = d([]), C = d(!1), b = d(null), v = d(!1), s = d(!1);
     c(() => r.modelValue, (t) => l.value = t), c(l, (t) => o("update:modelValue", t), { deep: !0 });
     const S = (t) => v.value = !0, g = (t) => o("read", t), k = (t) => s.value = t, D = (t) => {
       y.value = t, o("perms", t);
-    }, V = z(() => s.value ? r.editedCloseConfirm : "");
+    }, V = x(() => s.value ? r.editedCloseConfirm : "");
     return (t, n) => {
       const q = f("lkt-item-crud"), M = f("lkt-modal");
-      return w(), N(M, {
+      return O(), T(M, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -57,10 +57,10 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, K = /* @__PURE__ */ h({
         "disabled-veil-click": e.disabledVeilClick,
         "close-confirm": V.value,
         "close-confirm-key": e.editedCloseConfirmKey
-      }, j({
+      }, E({
         default: i(() => [
-          O(q, {
-            ref: (a) => C.value = a,
+          K(q, {
+            ref: (a) => b.value = a,
             modelValue: l.value,
             "onUpdate:modelValue": n[0] || (n[0] = (a) => l.value = a),
             "create-resource": e.createResource,
@@ -82,11 +82,14 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, K = /* @__PURE__ */ h({
             "is-create": e.isCreate,
             "save-validator": e.saveValidator
           }, {
-            item: i(({ item: a, editMode: R, loading: B }) => [
+            item: i(({ item: a, editMode: R, loading: B, isCreate: h, canUpdate: z, canDrop: w }) => [
               m(t.$slots, "item", {
                 item: a,
                 loading: B,
-                editMode: R
+                editMode: R,
+                isCreate: h,
+                canUpdate: z,
+                canDrop: w
               })
             ]),
             _: 3
@@ -94,12 +97,16 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, K = /* @__PURE__ */ h({
         ]),
         _: 2
       }, [
-        T(p)["pre-title"] ? {
+        U(p)["pre-title"] ? {
           name: "pre-title",
           fn: i(({ item: a }) => [
             m(t.$slots, "pre-title", {
               item: a,
-              editMode: b.value
+              loading: t.loading,
+              editMode: C.value,
+              isCreate: e.isCreate,
+              canUpdate: t.canUpdate,
+              canDrop: t.canDrop
             })
           ]),
           key: "0"
@@ -107,11 +114,11 @@ const E = { name: "LktModalCrud", inheritAttrs: !1 }, K = /* @__PURE__ */ h({
       ]), 1032, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
     };
   }
-}), L = {
+}), A = {
   install: (e, u) => {
-    e.component("lkt-modal-crud", K);
+    e.component("lkt-modal-crud", L);
   }
 };
 export {
-  L as default
+  A as default
 };

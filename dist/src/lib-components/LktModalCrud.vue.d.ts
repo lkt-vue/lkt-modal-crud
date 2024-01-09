@@ -669,12 +669,19 @@ declare const _default: {
     $slots: {
         'pre-title': (_: {
             item: any;
+            loading: any;
             editMode: boolean;
+            isCreate: boolean;
+            canUpdate: any;
+            canDrop: any;
         }) => any;
         item: (_: {
             item: any;
             loading: any;
             editMode: any;
+            isCreate: any;
+            canUpdate: any;
+            canDrop: any;
         }) => any;
     };
 });

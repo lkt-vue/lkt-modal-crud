@@ -91,7 +91,15 @@ const closeConfirm = computed(() => {
     >
 
         <template v-if="!!slots['pre-title']" v-slot:pre-title="{item}">
-            <slot name="pre-title" v-bind:item="item" v-bind:edit-mode="editMode"></slot>
+            <slot
+                name="pre-title"
+                v-bind:item="item"
+                v-bind:loading="loading"
+                v-bind:edit-mode="editMode"
+                v-bind:is-create="isCreate"
+                v-bind:can-update="canUpdate"
+                v-bind:can-drop="canDrop"
+            ></slot>
         </template>
 
         <lkt-item-crud
@@ -116,8 +124,16 @@ const closeConfirm = computed(() => {
             v-bind:is-create="isCreate"
             v-bind:save-validator="saveValidator"
         >
-            <template v-slot:item="{item, editMode, loading}">
-                <slot name="item" v-bind:item="item" v-bind:loading="loading" v-bind:edit-mode="editMode"></slot>
+            <template v-slot:item="{item, editMode, loading, isCreate, canUpdate, canDrop}">
+                <slot
+                    name="item"
+                    v-bind:item="item"
+                    v-bind:loading="loading"
+                    v-bind:edit-mode="editMode"
+                    v-bind:is-create="isCreate"
+                    v-bind:can-update="canUpdate"
+                    v-bind:can-drop="canDrop"
+                ></slot>
             </template>
         </lkt-item-crud>
     </lkt-modal>
