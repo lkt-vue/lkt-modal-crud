@@ -67,7 +67,7 @@ declare const _default: {
         };
         readResource: {
             type: StringConstructor;
-            required: true;
+            required: false;
         };
         createResource: {
             type: StringConstructor;
@@ -135,13 +135,13 @@ declare const _default: {
             default: () => boolean;
         };
     }>> & {
-        onUpdated?: (...args: any[]) => any;
-        onCreated?: (...args: any[]) => any;
+        onDrop?: (...args: any[]) => any;
+        onUpdate?: (...args: any[]) => any;
         "onUpdate:modelValue"?: (...args: any[]) => any;
         onRead?: (...args: any[]) => any;
-        onDropped?: (...args: any[]) => any;
+        onCreate?: (...args: any[]) => any;
         onPerms?: (...args: any[]) => any;
-    }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("created" | "updated" | "update:modelValue" | "read" | "dropped" | "perms")[], import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & Readonly<import("vue").ExtractPropTypes<{
+    }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("drop" | "update" | "update:modelValue" | "read" | "create" | "perms")[], import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & Readonly<import("vue").ExtractPropTypes<{
         modelValue: {
             type: ObjectConstructor;
             required: false;
@@ -209,7 +209,7 @@ declare const _default: {
         };
         readResource: {
             type: StringConstructor;
-            required: true;
+            required: false;
         };
         createResource: {
             type: StringConstructor;
@@ -277,11 +277,11 @@ declare const _default: {
             default: () => boolean;
         };
     }>> & {
-        onUpdated?: (...args: any[]) => any;
-        onCreated?: (...args: any[]) => any;
+        onDrop?: (...args: any[]) => any;
+        onUpdate?: (...args: any[]) => any;
         "onUpdate:modelValue"?: (...args: any[]) => any;
         onRead?: (...args: any[]) => any;
-        onDropped?: (...args: any[]) => any;
+        onCreate?: (...args: any[]) => any;
         onPerms?: (...args: any[]) => any;
     }, {
         zIndex: number;
@@ -387,7 +387,7 @@ declare const _default: {
         };
         readResource: {
             type: StringConstructor;
-            required: true;
+            required: false;
         };
         createResource: {
             type: StringConstructor;
@@ -455,11 +455,11 @@ declare const _default: {
             default: () => boolean;
         };
     }>> & {
-        onUpdated?: (...args: any[]) => any;
-        onCreated?: (...args: any[]) => any;
+        onDrop?: (...args: any[]) => any;
+        onUpdate?: (...args: any[]) => any;
         "onUpdate:modelValue"?: (...args: any[]) => any;
         onRead?: (...args: any[]) => any;
-        onDropped?: (...args: any[]) => any;
+        onCreate?: (...args: any[]) => any;
         onPerms?: (...args: any[]) => any;
     }, {}, {}, {}, {}, {
         zIndex: number;
@@ -562,7 +562,7 @@ declare const _default: {
     };
     readResource: {
         type: StringConstructor;
-        required: true;
+        required: false;
     };
     createResource: {
         type: StringConstructor;
@@ -630,13 +630,13 @@ declare const _default: {
         default: () => boolean;
     };
 }>> & {
-    onUpdated?: (...args: any[]) => any;
-    onCreated?: (...args: any[]) => any;
+    onDrop?: (...args: any[]) => any;
+    onUpdate?: (...args: any[]) => any;
     "onUpdate:modelValue"?: (...args: any[]) => any;
     onRead?: (...args: any[]) => any;
-    onDropped?: (...args: any[]) => any;
+    onCreate?: (...args: any[]) => any;
     onPerms?: (...args: any[]) => any;
-}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("created" | "updated" | "update:modelValue" | "read" | "dropped" | "perms")[], "created" | "updated" | "update:modelValue" | "read" | "dropped" | "perms", {
+}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("drop" | "update" | "update:modelValue" | "read" | "create" | "perms")[], "drop" | "update" | "update:modelValue" | "read" | "create" | "perms", {
     zIndex: number;
     title: string;
     size: string;

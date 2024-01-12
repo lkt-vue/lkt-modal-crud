@@ -25,7 +25,7 @@ const props = defineProps({
     editedCloseConfirm: {type: String, default: ''},
     editedCloseConfirmKey: {type: [String, Number], default: '_'},
 
-    readResource: {type: String, required: true},
+    readResource: {type: String, required: false},
     createResource: {type: String, required: false},
     updateResource: {type: String, required: false},
     dropResource: {type: String, required: false},
@@ -50,11 +50,10 @@ const props = defineProps({
 
 const slots = useSlots();
 
-const emit = defineEmits(['update:modelValue', 'read', 'created', 'updated', 'dropped', 'perms']);
+const emit = defineEmits(['update:modelValue', 'read', 'create', 'update', 'drop', 'perms']);
 
 const item = ref(props.modelValue),
     perms = ref([]),
-    editMode = ref(false),
     crudComponent = ref(null),
     hasErrors = ref(false),
     hasModifiedData = ref(false);
@@ -64,6 +63,9 @@ watch(item, (v) => emit('update:modelValue', v), {deep: true});
 
 const onReadError = (status: number) => hasErrors.value = true,
     onRead = (r: any) => emit('read', r),
+    onCreate = (r: any) => emit('create', r),
+    onUpdate = (r: any) => emit('update', r),
+    onDrop = (r: any) => emit('drop', r),
     onModifiedData = (v: boolean) => hasModifiedData.value = v,
     onPerms = (p: string[]) => {
         perms.value = p;
@@ -108,6 +110,9 @@ const closeConfirm = computed(() => {
             v-bind:create-resource="createResource"
             v-on:perms="onPerms"
             v-on:read="onRead"
+            v-on:create="onCreate"
+            v-on:update="onUpdate"
+            v-on:drop="onDrop"
             v-on:error="onReadError"
             v-on:modified-data="onModifiedData"
             v-bind:read-resource="readResource"

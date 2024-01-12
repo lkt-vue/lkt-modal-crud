@@ -30,8 +30,9 @@ export default {
         'lkt-http-client',
         'lkt-data-state',
         'mount-vue-component',
-        'lkt-fields',
+        'lkt-field-switch',
         'lkt-button',
+        'lkt-loader',
         'lkt-tabs',
       ],
       output: {
