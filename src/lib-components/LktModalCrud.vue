@@ -21,6 +21,9 @@ const props = defineProps({
     editModeText: {type: String, default: 'Edition Mode'},
     saveText: {type: String, default: 'Save'},
     dropText: {type: String, default: 'Delete'},
+    hiddenSave: {type: Boolean, default: false},
+    hiddenDrop: {type: Boolean, default: false},
+    hiddenButtons: {type: Boolean, default: false},
 
     editedCloseConfirm: {type: String, default: ''},
     editedCloseConfirmKey: {type: [String, Number], default: '_'},
@@ -128,6 +131,9 @@ const closeConfirm = computed(() => {
             v-bind:update-disabled="updateDisabled"
             v-bind:is-create="isCreate"
             v-bind:save-validator="saveValidator"
+            v-bind:hidden-save="hiddenSave"
+            v-bind:hidden-drop="hiddenDrop"
+            v-bind:hidden-buttons="hiddenButtons"
         >
             <template v-slot:item="{item, editMode, loading, isCreate, canUpdate, canDrop}">
                 <slot

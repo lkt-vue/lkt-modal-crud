@@ -57,6 +57,18 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
+        hiddenSave: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        hiddenDrop: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        hiddenButtons: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
         editedCloseConfirm: {
             type: StringConstructor;
             default: string;
@@ -199,6 +211,18 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
+        hiddenSave: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        hiddenDrop: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        hiddenButtons: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
         editedCloseConfirm: {
             type: StringConstructor;
             default: string;
@@ -298,6 +322,9 @@ declare const _default: {
         editModeText: string;
         saveText: string;
         dropText: string;
+        hiddenSave: boolean;
+        hiddenDrop: boolean;
+        hiddenButtons: boolean;
         editedCloseConfirm: string;
         editedCloseConfirmKey: string | number;
         readData: Record<string, any>;
@@ -376,6 +403,18 @@ declare const _default: {
         dropText: {
             type: StringConstructor;
             default: string;
+        };
+        hiddenSave: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        hiddenDrop: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        hiddenButtons: {
+            type: BooleanConstructor;
+            default: boolean;
         };
         editedCloseConfirm: {
             type: StringConstructor;
@@ -476,6 +515,9 @@ declare const _default: {
         editModeText: string;
         saveText: string;
         dropText: string;
+        hiddenSave: boolean;
+        hiddenDrop: boolean;
+        hiddenButtons: boolean;
         editedCloseConfirm: string;
         editedCloseConfirmKey: string | number;
         readData: Record<string, any>;
@@ -551,6 +593,18 @@ declare const _default: {
     dropText: {
         type: StringConstructor;
         default: string;
+    };
+    hiddenSave: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    hiddenDrop: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    hiddenButtons: {
+        type: BooleanConstructor;
+        default: boolean;
     };
     editedCloseConfirm: {
         type: StringConstructor;
@@ -651,6 +705,9 @@ declare const _default: {
     editModeText: string;
     saveText: string;
     dropText: string;
+    hiddenSave: boolean;
+    hiddenDrop: boolean;
+    hiddenButtons: boolean;
     editedCloseConfirm: string;
     editedCloseConfirmKey: string | number;
     readData: Record<string, any>;
