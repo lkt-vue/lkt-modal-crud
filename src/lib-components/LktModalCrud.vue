@@ -55,8 +55,9 @@ const slots = useSlots();
 
 const emit = defineEmits(['update:modelValue', 'read', 'create', 'update', 'drop', 'perms']);
 
+let _perms:string[] = [];
 const item = ref(props.modelValue),
-    perms = ref([]),
+    perms = ref(_perms),
     crudComponent = ref(null),
     hasErrors = ref(false),
     hasModifiedData = ref(false);
@@ -95,7 +96,7 @@ const closeConfirm = computed(() => {
                v-bind:close-confirm-key="editedCloseConfirmKey"
     >
 
-        <template v-if="!!slots['pre-title']" v-slot:pre-title="{item, loading, editMode, isCreate, canUpdate, canDrop}">
+        <template v-slot:pre-title="{item, loading, editMode, isCreate, canUpdate, canDrop}">
             <slot
                 name="pre-title"
                 v-bind:item="item"
@@ -104,7 +105,7 @@ const closeConfirm = computed(() => {
                 v-bind:is-create="isCreate"
                 v-bind:can-update="canUpdate"
                 v-bind:can-drop="canDrop"
-            ></slot>
+            />
         </template>
 
         <lkt-item-crud
@@ -144,7 +145,7 @@ const closeConfirm = computed(() => {
                     v-bind:is-create="isCreate"
                     v-bind:can-update="canUpdate"
                     v-bind:can-drop="canDrop"
-                ></slot>
+                />
             </template>
         </lkt-item-crud>
     </lkt-modal>

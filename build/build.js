@@ -1,11 +1,6 @@
-import { defineComponent as N, useSlots as j, ref as l, watch as b, computed as O, resolveComponent as v, openBlock as T, createBlock as E, createSlots as K, withCtx as c, createVNode as I, renderSlot as C, unref as F } from "vue";
-import U from "lkt-button";
-import $ from "lkt-field-switch";
-import A from "lkt-item-crud";
-import P from "lkt-loader";
-import G from "lkt-modal";
-const H = { name: "LktModalCrud", inheritAttrs: !1 }, J = /* @__PURE__ */ N({
-  ...H,
+import { defineComponent as j, useSlots as O, ref as l, watch as b, computed as T, resolveComponent as C, openBlock as E, createBlock as K, withCtx as f, renderSlot as v, createVNode as I } from "vue";
+const L = { name: "LktModalCrud", inheritAttrs: !1 }, U = /* @__PURE__ */ j({
+  ...L,
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
     palette: { type: String, default: "" },
@@ -45,14 +40,18 @@ const H = { name: "LktModalCrud", inheritAttrs: !1 }, J = /* @__PURE__ */ N({
   },
   emits: ["update:modelValue", "read", "create", "update", "drop", "perms"],
   setup(e, { emit: m }) {
-    const r = e, k = j(), a = m, o = l(r.modelValue), S = l([]), h = l(null), D = l(!1), p = l(!1);
-    b(() => r.modelValue, (t) => o.value = t), b(o, (t) => a("update:modelValue", t), { deep: !0 });
-    const g = (t) => D.value = !0, B = (t) => a("read", t), V = (t) => a("create", t), q = (t) => a("update", t), R = (t) => a("drop", t), w = (t) => p.value = t, x = (t) => {
-      S.value = t, a("perms", t);
-    }, z = O(() => p.value ? r.editedCloseConfirm : "");
+    const r = e;
+    O();
+    const d = m;
+    let S = [];
+    const o = l(r.modelValue), h = l(S), D = l(null), g = l(!1), p = l(!1);
+    b(() => r.modelValue, (t) => o.value = t), b(o, (t) => d("update:modelValue", t), { deep: !0 });
+    const k = (t) => g.value = !0, B = (t) => d("read", t), V = (t) => d("create", t), q = (t) => d("update", t), R = (t) => d("drop", t), x = (t) => p.value = t, z = (t) => {
+      h.value = t, d("perms", t);
+    }, w = T(() => p.value ? r.editedCloseConfirm : "");
     return (t, y) => {
-      const L = v("lkt-item-crud"), M = v("lkt-modal");
-      return T(), E(M, {
+      const M = C("lkt-item-crud"), N = C("lkt-modal");
+      return E(), K(N, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -63,22 +62,32 @@ const H = { name: "LktModalCrud", inheritAttrs: !1 }, J = /* @__PURE__ */ N({
         "show-close": e.showClose,
         "disabled-close": e.disabledClose,
         "disabled-veil-click": e.disabledVeilClick,
-        "close-confirm": z.value,
+        "close-confirm": w.value,
         "close-confirm-key": e.editedCloseConfirmKey
-      }, K({
-        default: c(() => [
-          I(L, {
-            ref: (d) => h.value = d,
+      }, {
+        "pre-title": f(({ item: a, loading: i, editMode: u, isCreate: n, canUpdate: s, canDrop: c }) => [
+          v(t.$slots, "pre-title", {
+            item: a,
+            loading: i,
+            editMode: u,
+            isCreate: n,
+            canUpdate: s,
+            canDrop: c
+          })
+        ]),
+        default: f(() => [
+          I(M, {
+            ref: (a) => D.value = a,
             modelValue: o.value,
-            "onUpdate:modelValue": y[0] || (y[0] = (d) => o.value = d),
+            "onUpdate:modelValue": y[0] || (y[0] = (a) => o.value = a),
             "create-resource": e.createResource,
-            onPerms: x,
+            onPerms: z,
             onRead: B,
             onCreate: V,
             onUpdate: q,
             onDrop: R,
-            onError: g,
-            onModifiedData: w,
+            onError: k,
+            onModifiedData: x,
             "read-resource": e.readResource,
             "read-data": e.readData,
             "drop-confirm": e.dropConfirm,
@@ -96,43 +105,28 @@ const H = { name: "LktModalCrud", inheritAttrs: !1 }, J = /* @__PURE__ */ N({
             "hidden-drop": e.hiddenDrop,
             "hidden-buttons": e.hiddenButtons
           }, {
-            item: c(({ item: d, editMode: i, loading: u, isCreate: n, canUpdate: s, canDrop: f }) => [
-              C(t.$slots, "item", {
-                item: d,
+            item: f(({ item: a, editMode: i, loading: u, isCreate: n, canUpdate: s, canDrop: c }) => [
+              v(t.$slots, "item", {
+                item: a,
                 loading: u,
                 editMode: i,
                 isCreate: n,
                 canUpdate: s,
-                canDrop: f
+                canDrop: c
               })
             ]),
             _: 3
           }, 8, ["modelValue", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-resource", "drop-data", "update-confirm", "update-resource", "update-data", "drop-disabled", "create-disabled", "update-disabled", "is-create", "save-validator", "hidden-save", "hidden-drop", "hidden-buttons"])
         ]),
-        _: 2
-      }, [
-        F(k)["pre-title"] ? {
-          name: "pre-title",
-          fn: c(({ item: d, loading: i, editMode: u, isCreate: n, canUpdate: s, canDrop: f }) => [
-            C(t.$slots, "pre-title", {
-              item: d,
-              loading: i,
-              editMode: u,
-              isCreate: n,
-              canUpdate: s,
-              canDrop: f
-            })
-          ]),
-          key: "0"
-        } : void 0
-      ]), 1032, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
+        _: 3
+      }, 8, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
     };
   }
-}), ee = {
+}), A = {
   install: (e, m) => {
-    e.component("lkt-modal-crud") === void 0 && e.component("lkt-modal-crud", J), e.component("lkt-button") === void 0 && e.use(U), e.component("lkt-field-switch") === void 0 && e.use($), e.component("lkt-item-crud") === void 0 && e.use(A), e.component("lkt-loader") === void 0 && e.use(P), e.component("lkt-modal") === void 0 && e.use(G);
+    e.component("lkt-modal-crud") === void 0 && e.component("lkt-modal-crud", U);
   }
 };
 export {
-  ee as default
+  A as default
 };
