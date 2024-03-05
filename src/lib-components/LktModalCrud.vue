@@ -43,6 +43,10 @@ const props = defineProps({
     updateConfirm: {type: String, default: ''},
     dropConfirm: {type: String, default: ''},
 
+    createConfirmData: {type: String, default: ''},
+    updateConfirmData: {type: String, default: ''},
+    dropConfirmData: {type: String, default: ''},
+
     createDisabled: {type: Boolean, default: false},
     updateDisabled: {type: Boolean, default: false},
     dropDisabled: {type: Boolean, default: false},
@@ -122,12 +126,17 @@ const closeConfirm = computed(() => {
             v-bind:read-resource="readResource"
             v-bind:read-data="readData"
             v-bind:drop-confirm="dropConfirm"
+            v-bind:drop-confirm-data="dropConfirmData"
             v-bind:drop-resource="dropResource"
             v-bind:drop-data="dropData"
             v-bind:update-confirm="updateConfirm"
+            v-bind:update-confirm-data="updateConfirmData"
             v-bind:update-resource="updateResource"
             v-bind:update-data="updateData"
             v-bind:drop-disabled="dropDisabled"
+            v-bind:create-confirm="createConfirm"
+            v-bind:create-confirm-data="createConfirmData"
+            v-bind:create-data="createData"
             v-bind:create-disabled="createDisabled"
             v-bind:update-disabled="updateDisabled"
             v-bind:is-create="isCreate"
