@@ -1,5 +1,5 @@
-import { defineComponent as j, useSlots as O, ref as l, watch as C, computed as T, resolveComponent as b, openBlock as E, createBlock as K, withCtx as f, renderSlot as D, createVNode as I } from "vue";
-const L = { name: "LktModalCrud", inheritAttrs: !1 }, U = /* @__PURE__ */ j({
+import { defineComponent as M, useSlots as N, ref as l, watch as C, computed as T, resolveComponent as b, openBlock as E, createBlock as K, withCtx as f, renderSlot as D, createVNode as I } from "vue";
+const L = { name: "LktModalCrud", inheritAttrs: !1 }, U = /* @__PURE__ */ M({
   ...L,
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
@@ -33,9 +33,9 @@ const L = { name: "LktModalCrud", inheritAttrs: !1 }, U = /* @__PURE__ */ j({
     createConfirm: { type: String, default: "" },
     updateConfirm: { type: String, default: "" },
     dropConfirm: { type: String, default: "" },
-    createConfirmData: { type: String, default: "" },
-    updateConfirmData: { type: String, default: "" },
-    dropConfirmData: { type: String, default: "" },
+    createConfirmData: { type: Object, default: () => ({}) },
+    updateConfirmData: { type: Object, default: () => ({}) },
+    dropConfirmData: { type: Object, default: () => ({}) },
     createDisabled: { type: Boolean, default: !1 },
     updateDisabled: { type: Boolean, default: !1 },
     dropDisabled: { type: Boolean, default: !1 },
@@ -44,17 +44,17 @@ const L = { name: "LktModalCrud", inheritAttrs: !1 }, U = /* @__PURE__ */ j({
   emits: ["update:modelValue", "read", "create", "update", "drop", "perms"],
   setup(e, { emit: m }) {
     const o = e;
-    O();
+    N();
     const d = m;
-    let S = [];
-    const r = l(o.modelValue), v = l(S), g = l(null), h = l(!1), p = l(!1);
+    let v = [];
+    const r = l(o.modelValue), S = l(v), h = l(null), g = l(!1), p = l(!1);
     C(() => o.modelValue, (t) => r.value = t), C(r, (t) => d("update:modelValue", t), { deep: !0 });
-    const k = (t) => h.value = !0, B = (t) => d("read", t), V = (t) => d("create", t), q = (t) => d("update", t), R = (t) => d("drop", t), x = (t) => p.value = t, z = (t) => {
-      v.value = t, d("perms", t);
-    }, w = T(() => p.value ? o.editedCloseConfirm : "");
+    const k = (t) => g.value = !0, B = (t) => d("read", t), V = (t) => d("create", t), q = (t) => d("update", t), R = (t) => d("drop", t), j = (t) => p.value = t, x = (t) => {
+      S.value = t, d("perms", t);
+    }, z = T(() => p.value ? o.editedCloseConfirm : "");
     return (t, y) => {
-      const M = b("lkt-item-crud"), N = b("lkt-modal");
-      return E(), K(N, {
+      const O = b("lkt-item-crud"), w = b("lkt-modal");
+      return E(), K(w, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -65,32 +65,32 @@ const L = { name: "LktModalCrud", inheritAttrs: !1 }, U = /* @__PURE__ */ j({
         "show-close": e.showClose,
         "disabled-close": e.disabledClose,
         "disabled-veil-click": e.disabledVeilClick,
-        "close-confirm": w.value,
+        "close-confirm": z.value,
         "close-confirm-key": e.editedCloseConfirmKey
       }, {
-        "pre-title": f(({ item: a, loading: i, editMode: n, isCreate: u, canUpdate: s, canDrop: c }) => [
+        "pre-title": f(({ item: a, loading: i, editMode: n, isCreate: u, canUpdate: c, canDrop: s }) => [
           D(t.$slots, "pre-title", {
             item: a,
             loading: i,
             editMode: n,
             isCreate: u,
-            canUpdate: s,
-            canDrop: c
+            canUpdate: c,
+            canDrop: s
           })
         ]),
         default: f(() => [
-          I(M, {
-            ref: (a) => g.value = a,
+          I(O, {
+            ref: (a) => h.value = a,
             modelValue: r.value,
             "onUpdate:modelValue": y[0] || (y[0] = (a) => r.value = a),
             "create-resource": e.createResource,
-            onPerms: z,
+            onPerms: x,
             onRead: B,
             onCreate: V,
             onUpdate: q,
             onDrop: R,
             onError: k,
-            onModifiedData: x,
+            onModifiedData: j,
             "read-resource": e.readResource,
             "read-data": e.readData,
             "drop-confirm": e.dropConfirm,
@@ -113,14 +113,14 @@ const L = { name: "LktModalCrud", inheritAttrs: !1 }, U = /* @__PURE__ */ j({
             "hidden-drop": e.hiddenDrop,
             "hidden-buttons": e.hiddenButtons
           }, {
-            item: f(({ item: a, editMode: i, loading: n, isCreate: u, canUpdate: s, canDrop: c }) => [
+            item: f(({ item: a, editMode: i, loading: n, isCreate: u, canUpdate: c, canDrop: s }) => [
               D(t.$slots, "item", {
                 item: a,
                 loading: n,
                 editMode: i,
                 isCreate: u,
-                canUpdate: s,
-                canDrop: c
+                canUpdate: c,
+                canDrop: s
               })
             ]),
             _: 3

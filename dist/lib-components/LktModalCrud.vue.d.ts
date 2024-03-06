@@ -129,16 +129,16 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         default: string;
     };
     createConfirmData: {
-        type: StringConstructor;
-        default: string;
+        type: ObjectConstructor;
+        default: () => {};
     };
     updateConfirmData: {
-        type: StringConstructor;
-        default: string;
+        type: ObjectConstructor;
+        default: () => {};
     };
     dropConfirmData: {
-        type: StringConstructor;
-        default: string;
+        type: ObjectConstructor;
+        default: () => {};
     };
     createDisabled: {
         type: BooleanConstructor;
@@ -295,16 +295,16 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         default: string;
     };
     createConfirmData: {
-        type: StringConstructor;
-        default: string;
+        type: ObjectConstructor;
+        default: () => {};
     };
     updateConfirmData: {
-        type: StringConstructor;
-        default: string;
+        type: ObjectConstructor;
+        default: () => {};
     };
     dropConfirmData: {
-        type: StringConstructor;
-        default: string;
+        type: ObjectConstructor;
+        default: () => {};
     };
     createDisabled: {
         type: BooleanConstructor;
@@ -358,9 +358,9 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     createConfirm: string;
     updateConfirm: string;
     dropConfirm: string;
-    createConfirmData: string;
-    updateConfirmData: string;
-    dropConfirmData: string;
+    createConfirmData: Record<string, any>;
+    updateConfirmData: Record<string, any>;
+    dropConfirmData: Record<string, any>;
     createDisabled: boolean;
     updateDisabled: boolean;
     dropDisabled: boolean;
