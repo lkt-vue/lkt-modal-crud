@@ -157,7 +157,9 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         required: false;
         default: () => boolean;
     };
-}, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+}, {
+    doRefresh: () => void;
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     drop: (...args: any[]) => void;
     update: (...args: any[]) => void;
     "update:modelValue": (...args: any[]) => void;

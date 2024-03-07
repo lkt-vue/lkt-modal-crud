@@ -83,6 +83,13 @@ const onReadError = (status: number) => hasErrors.value = true,
 const closeConfirm = computed(() => {
     return hasModifiedData.value ? props.editedCloseConfirm : '';
 })
+
+defineExpose({
+    doRefresh: () => {
+        //@ts-ignore
+        crudComponent.value.doRefresh();
+    }
+});
 </script>
 
 <template>
