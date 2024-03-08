@@ -52,6 +52,7 @@ const props = defineProps({
     dropDisabled: {type: Boolean, default: false},
 
     saveValidator: {type: Function, required: false, default: () => true},
+    beforeClose: {type: Function, default: undefined}
 
 });
 
@@ -101,6 +102,7 @@ defineExpose({
                v-bind:palette="palette"
                v-bind:size="size"
                v-bind:show-close="showClose"
+               v-bind:before-close="beforeClose"
                v-bind:disabled-close="disabledClose"
                v-bind:disabled-veil-click="disabledVeilClick"
                v-bind:close-confirm="closeConfirm"

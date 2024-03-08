@@ -1,6 +1,6 @@
-import { defineComponent as N, useSlots as T, ref as l, watch as b, computed as E, resolveComponent as v, openBlock as K, createBlock as I, withCtx as f, renderSlot as D, createVNode as L } from "vue";
-const U = { name: "LktModalCrud", inheritAttrs: !1 }, $ = /* @__PURE__ */ N({
-  ...U,
+import { defineComponent as N, useSlots as T, ref as l, watch as b, computed as E, resolveComponent as v, openBlock as K, createBlock as F, withCtx as c, renderSlot as D, createVNode as I } from "vue";
+const L = { name: "LktModalCrud", inheritAttrs: !1 }, U = /* @__PURE__ */ N({
+  ...L,
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
     palette: { type: String, default: "" },
@@ -39,7 +39,8 @@ const U = { name: "LktModalCrud", inheritAttrs: !1 }, $ = /* @__PURE__ */ N({
     createDisabled: { type: Boolean, default: !1 },
     updateDisabled: { type: Boolean, default: !1 },
     dropDisabled: { type: Boolean, default: !1 },
-    saveValidator: { type: Function, required: !1, default: () => !0 }
+    saveValidator: { type: Function, required: !1, default: () => !0 },
+    beforeClose: { type: Function, default: void 0 }
   },
   emits: ["update:modelValue", "read", "create", "update", "drop", "perms"],
   setup(e, { expose: m, emit: S }) {
@@ -58,7 +59,7 @@ const U = { name: "LktModalCrud", inheritAttrs: !1 }, $ = /* @__PURE__ */ N({
       }
     }), (t, C) => {
       const w = v("lkt-item-crud"), M = v("lkt-modal");
-      return K(), I(M, {
+      return K(), F(M, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -67,23 +68,24 @@ const U = { name: "LktModalCrud", inheritAttrs: !1 }, $ = /* @__PURE__ */ N({
         palette: e.palette,
         size: e.size,
         "show-close": e.showClose,
+        "before-close": e.beforeClose,
         "disabled-close": e.disabledClose,
         "disabled-veil-click": e.disabledVeilClick,
         "close-confirm": O.value,
         "close-confirm-key": e.editedCloseConfirmKey
       }, {
-        "pre-title": f(({ item: a, loading: i, editMode: u, isCreate: n, canUpdate: s, canDrop: c }) => [
+        "pre-title": c(({ item: a, loading: i, editMode: u, isCreate: n, canUpdate: f, canDrop: s }) => [
           D(t.$slots, "pre-title", {
             item: a,
             loading: i,
             editMode: u,
             isCreate: n,
-            canUpdate: s,
-            canDrop: c
+            canUpdate: f,
+            canDrop: s
           })
         ]),
-        default: f(() => [
-          L(w, {
+        default: c(() => [
+          I(w, {
             ref: (a) => p.value = a,
             modelValue: r.value,
             "onUpdate:modelValue": C[0] || (C[0] = (a) => r.value = a),
@@ -117,28 +119,28 @@ const U = { name: "LktModalCrud", inheritAttrs: !1 }, $ = /* @__PURE__ */ N({
             "hidden-drop": e.hiddenDrop,
             "hidden-buttons": e.hiddenButtons
           }, {
-            item: f(({ item: a, editMode: i, loading: u, isCreate: n, canUpdate: s, canDrop: c }) => [
+            item: c(({ item: a, editMode: i, loading: u, isCreate: n, canUpdate: f, canDrop: s }) => [
               D(t.$slots, "item", {
                 item: a,
                 loading: u,
                 editMode: i,
                 isCreate: n,
-                canUpdate: s,
-                canDrop: c
+                canUpdate: f,
+                canDrop: s
               })
             ]),
             _: 3
           }, 8, ["modelValue", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "is-create", "save-validator", "hidden-save", "hidden-drop", "hidden-buttons"])
         ]),
         _: 3
-      }, 8, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
+      }, 8, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "before-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
     };
   }
-}), F = {
+}), A = {
   install: (e, m) => {
-    e.component("lkt-modal-crud") === void 0 && e.component("lkt-modal-crud", $);
+    e.component("lkt-modal-crud") === void 0 && e.component("lkt-modal-crud", U);
   }
 };
 export {
-  F as default
+  A as default
 };

@@ -157,6 +157,10 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         required: false;
         default: () => boolean;
     };
+    beforeClose: {
+        type: FunctionConstructor;
+        default: undefined;
+    };
 }, {
     doRefresh: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
@@ -325,6 +329,10 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         required: false;
         default: () => boolean;
     };
+    beforeClose: {
+        type: FunctionConstructor;
+        default: undefined;
+    };
 }>> & {
     onDrop?: ((...args: any[]) => any) | undefined;
     onUpdate?: ((...args: any[]) => any) | undefined;
@@ -367,6 +375,7 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     updateDisabled: boolean;
     dropDisabled: boolean;
     saveValidator: Function;
+    beforeClose: Function;
 }, {}>, {
     "pre-title"?(_: {
         item: any;
