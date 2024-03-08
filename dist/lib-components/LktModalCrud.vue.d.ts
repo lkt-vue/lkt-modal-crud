@@ -161,6 +161,16 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         type: FunctionConstructor;
         default: undefined;
     };
+    onCreate: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => boolean;
+    };
+    onUpdate: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => boolean;
+    };
 }, {
     doRefresh: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
@@ -333,6 +343,16 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         type: FunctionConstructor;
         default: undefined;
     };
+    onCreate: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => boolean;
+    };
+    onUpdate: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => boolean;
+    };
 }>> & {
     onDrop?: ((...args: any[]) => any) | undefined;
     onUpdate?: ((...args: any[]) => any) | undefined;
@@ -344,6 +364,8 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     zIndex: number;
     title: string;
     size: string;
+    onUpdate: Function;
+    onCreate: Function;
     modelValue: Record<string, any>;
     palette: string;
     preTitle: string;

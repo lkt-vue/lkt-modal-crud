@@ -52,7 +52,10 @@ const props = defineProps({
     dropDisabled: {type: Boolean, default: false},
 
     saveValidator: {type: Function, required: false, default: () => true},
-    beforeClose: {type: Function, default: undefined}
+    beforeClose: {type: Function, default: undefined},
+
+    onCreate: {type: Function, required: false, default: () => true},
+    onUpdate: {type: Function, required: false, default: () => true},
 
 });
 
@@ -153,6 +156,8 @@ defineExpose({
             v-bind:hidden-save="hiddenSave"
             v-bind:hidden-drop="hiddenDrop"
             v-bind:hidden-buttons="hiddenButtons"
+            v-bind:on-create="onCreate"
+            v-bind:on-update="onUpdate"
         >
             <template v-slot:item="{item, editMode, loading, isCreate, canUpdate, canDrop}">
                 <slot
