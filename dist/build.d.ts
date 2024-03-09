@@ -1,4 +1,5 @@
-export { P as default };
-declare namespace P {
-    function install(e: any, y: any): void;
+declare function G(e?: boolean): void;
+declare namespace J {
+    function install(e: any, C: any): void;
 }
+export { G as debugLktModalCrud, J as default };

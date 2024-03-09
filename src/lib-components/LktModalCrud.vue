@@ -67,7 +67,8 @@ const item = ref(props.modelValue),
     perms = ref(_perms),
     crudComponent = ref(null),
     hasErrors = ref(false),
-    hasModifiedData = ref(false);
+    hasModifiedData = ref(false),
+    createMode = ref(props.isCreate);
 
 watch(() => props.modelValue, v => item.value = v);
 watch(item, (v) => emit('update:modelValue', v), {deep: true});
@@ -78,8 +79,14 @@ const onReadError = (status: number) => hasErrors.value = true,
         debug('Detected create on Item Crud', r);
         emit('create', r);
     },
-    onUpdate = (r: any) => emit('update', r),
-    onDrop = (r: any) => emit('drop', r),
+    onUpdate = (r: any) => {
+        debug('Detected update on Item Crud', r);
+        emit('update', r)
+    },
+    onDrop = (r: any) => {
+        debug('Detected drop on Item Crud', r);
+        emit('drop', r)
+    },
     onModifiedData = (v: boolean) => hasModifiedData.value = v,
     onPerms = (p: string[]) => {
         perms.value = p;
@@ -129,6 +136,7 @@ defineExpose({
         <lkt-item-crud
             :ref="(el:any) => crudComponent = el"
             v-model="item"
+            v-model:is-create="createMode"
             v-bind:create-resource="createResource"
             v-on:perms="onPerms"
             v-on:read="onRead"
@@ -153,7 +161,6 @@ defineExpose({
             v-bind:create-data="createData"
             v-bind:create-disabled="createDisabled"
             v-bind:update-disabled="updateDisabled"
-            v-bind:is-create="isCreate"
             v-bind:save-validator="saveValidator"
             v-bind:hidden-save="hiddenSave"
             v-bind:hidden-drop="hiddenDrop"
