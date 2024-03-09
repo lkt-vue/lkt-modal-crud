@@ -3,7 +3,9 @@ export default {name: 'LktModalCrud', inheritAttrs: false};
 </script>
 
 <script setup lang="ts">
-import {computed, ref, useSlots, watch} from "vue";
+import {computed, ref, watch} from "vue";
+import {reOpenModal} from "lkt-modal";
+import {debug} from "../functions/debug";
 
 const props = defineProps({
     modelValue: {type: Object, required: false, default: () => ({})},
@@ -56,10 +58,7 @@ const props = defineProps({
 
     onCreate: {type: Function, required: false, default: () => true},
     onUpdate: {type: Function, required: false, default: () => true},
-
 });
-
-const slots = useSlots();
 
 const emit = defineEmits(['update:modelValue', 'read', 'create', 'update', 'drop', 'perms']);
 
@@ -75,7 +74,10 @@ watch(item, (v) => emit('update:modelValue', v), {deep: true});
 
 const onReadError = (status: number) => hasErrors.value = true,
     onRead = (r: any) => emit('read', r),
-    onCreate = (r: any) => emit('create', r),
+    onCreate = (r: any) => {
+        debug('Detected create on Item Crud', r);
+        emit('create', r);
+    },
     onUpdate = (r: any) => emit('update', r),
     onDrop = (r: any) => emit('drop', r),
     onModifiedData = (v: boolean) => hasModifiedData.value = v,
