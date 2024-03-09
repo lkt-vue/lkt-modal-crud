@@ -2,11 +2,11 @@ import { defineComponent as T, ref as o, watch as h, computed as F, resolveCompo
 const C = class C {
 };
 C.debugEnabled = !1;
-let u = C;
+let n = C;
 const y = (...e) => {
-  u.debugEnabled && console.info("[LktModalCrud] ", ...e);
+  n.debugEnabled && console.info("[LktModalCrud] ", ...e);
 }, H = (e = !0) => {
-  u.debugEnabled = e;
+  n.debugEnabled = e;
 }, A = { name: "LktModalCrud", inheritAttrs: !1 }, P = /* @__PURE__ */ T({
   ...A,
   props: {
@@ -88,10 +88,10 @@ const y = (...e) => {
         "close-confirm": N.value,
         "close-confirm-key": e.editedCloseConfirmKey
       }, {
-        "pre-title": p(({ item: a, loading: n, editMode: c, isCreate: f, canUpdate: s, canDrop: m }) => [
+        "pre-title": p(({ item: a, loading: u, editMode: c, isCreate: f, canUpdate: s, canDrop: m }) => [
           S(t.$slots, "pre-title", {
             item: a,
-            loading: n,
+            loading: u,
             editMode: c,
             isCreate: f,
             canUpdate: s,
@@ -134,13 +134,14 @@ const y = (...e) => {
             "hidden-drop": e.hiddenDrop,
             "hidden-buttons": e.hiddenButtons,
             "on-create": e.onCreate,
-            "on-update": e.onUpdate
+            "on-update": e.onUpdate,
+            "inside-modal": ""
           }, {
-            item: p(({ item: a, editMode: n, loading: c, isCreate: f, canUpdate: s, canDrop: m }) => [
+            item: p(({ item: a, editMode: u, loading: c, isCreate: f, canUpdate: s, canDrop: m }) => [
               S(t.$slots, "item", {
                 item: a,
                 loading: c,
-                editMode: n,
+                editMode: u,
                 isCreate: f,
                 canUpdate: s,
                 canDrop: m

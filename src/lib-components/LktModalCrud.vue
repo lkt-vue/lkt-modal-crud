@@ -167,6 +167,7 @@ defineExpose({
             v-bind:hidden-buttons="hiddenButtons"
             v-bind:on-create="onCreate"
             v-bind:on-update="onUpdate"
+            inside-modal
         >
             <template v-slot:item="{item, editMode, loading, isCreate, canUpdate, canDrop}">
                 <slot
