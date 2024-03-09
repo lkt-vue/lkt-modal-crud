@@ -75,11 +75,11 @@ watch(item, (v) => emit('update:modelValue', v), {deep: true});
 
 const onReadError = (status: number) => hasErrors.value = true,
     onRead = (r: any) => emit('read', r),
-    onCreate = (r: any) => {
+    onCreateCb = (r: any) => {
         debug('Detected create on Item Crud', r);
         emit('create', r);
     },
-    onUpdate = (r: any) => {
+    onUpdateCb = (r: any) => {
         debug('Detected update on Item Crud', r);
         emit('update', r)
     },
@@ -140,8 +140,8 @@ defineExpose({
             v-bind:create-resource="createResource"
             v-on:perms="onPerms"
             v-on:read="onRead"
-            v-on:create="onCreate"
-            v-on:update="onUpdate"
+            v-on:create="onCreateCb"
+            v-on:update="onUpdateCb"
             v-on:drop="onDrop"
             v-on:error="onReadError"
             v-on:modified-data="onModifiedData"

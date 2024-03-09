@@ -1,13 +1,13 @@
-import { defineComponent as F, ref as l, watch as S, computed as K, resolveComponent as B, openBlock as L, createBlock as U, withCtx as p, renderSlot as V, createVNode as $ } from "vue";
-const b = class b {
+import { defineComponent as T, ref as o, watch as h, computed as F, resolveComponent as k, openBlock as K, createBlock as L, withCtx as p, renderSlot as S, createVNode as $ } from "vue";
+const C = class C {
 };
-b.debugEnabled = !1;
-let u = b;
+C.debugEnabled = !1;
+let u = C;
 const y = (...e) => {
-  u.debugEnabled && console.info("[LktHttpClient] ", ...e);
-}, G = (e = !0) => {
+  u.debugEnabled && console.info("[LktModalCrud] ", ...e);
+}, H = (e = !0) => {
   u.debugEnabled = e;
-}, A = { name: "LktModalCrud", inheritAttrs: !1 }, H = /* @__PURE__ */ F({
+}, A = { name: "LktModalCrud", inheritAttrs: !1 }, P = /* @__PURE__ */ T({
   ...A,
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
@@ -53,27 +53,27 @@ const y = (...e) => {
     onUpdate: { type: Function, required: !1, default: () => !0 }
   },
   emits: ["update:modelValue", "read", "create", "update", "drop", "perms"],
-  setup(e, { expose: C, emit: q }) {
-    const o = e, d = q;
-    let R = [];
-    const r = l(o.modelValue), x = l(R), v = l(null), j = l(!1), D = l(!1), g = l(o.isCreate);
-    S(() => o.modelValue, (t) => r.value = t), S(r, (t) => d("update:modelValue", t), { deep: !0 });
-    const z = (t) => j.value = !0, M = (t) => d("read", t), h = (t) => {
+  setup(e, { expose: b, emit: B }) {
+    const l = e, d = B;
+    let V = [];
+    const r = o(l.modelValue), q = o(V), v = o(null), R = o(!1), D = o(!1), g = o(l.isCreate);
+    h(() => l.modelValue, (t) => r.value = t), h(r, (t) => d("update:modelValue", t), { deep: !0 });
+    const x = (t) => R.value = !0, M = (t) => d("read", t), j = (t) => {
       y("Detected create on Item Crud", t), d("create", t);
-    }, k = (t) => {
+    }, z = (t) => {
       y("Detected update on Item Crud", t), d("update", t);
     }, O = (t) => {
       y("Detected drop on Item Crud", t), d("drop", t);
     }, E = (t) => D.value = t, w = (t) => {
-      x.value = t, d("perms", t);
-    }, N = K(() => D.value ? o.editedCloseConfirm : "");
-    return C({
+      q.value = t, d("perms", t);
+    }, N = F(() => D.value ? l.editedCloseConfirm : "");
+    return b({
       doRefresh: () => {
         v.value.doRefresh();
       }
     }), (t, i) => {
-      const I = B("lkt-item-crud"), T = B("lkt-modal");
-      return L(), U(T, {
+      const U = k("lkt-item-crud"), I = k("lkt-modal");
+      return K(), L(I, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -88,18 +88,18 @@ const y = (...e) => {
         "close-confirm": N.value,
         "close-confirm-key": e.editedCloseConfirmKey
       }, {
-        "pre-title": p(({ item: a, loading: n, editMode: c, isCreate: s, canUpdate: f, canDrop: m }) => [
-          V(t.$slots, "pre-title", {
+        "pre-title": p(({ item: a, loading: n, editMode: c, isCreate: f, canUpdate: s, canDrop: m }) => [
+          S(t.$slots, "pre-title", {
             item: a,
             loading: n,
             editMode: c,
-            isCreate: s,
-            canUpdate: f,
+            isCreate: f,
+            canUpdate: s,
             canDrop: m
           })
         ]),
         default: p(() => [
-          $(I, {
+          $(U, {
             ref: (a) => v.value = a,
             modelValue: r.value,
             "onUpdate:modelValue": i[0] || (i[0] = (a) => r.value = a),
@@ -108,10 +108,10 @@ const y = (...e) => {
             "create-resource": e.createResource,
             onPerms: w,
             onRead: M,
-            onCreate: h,
-            onUpdate: k,
+            onCreate: j,
+            onUpdate: z,
             onDrop: O,
-            onError: z,
+            onError: x,
             onModifiedData: E,
             "read-resource": e.readResource,
             "read-data": e.readData,
@@ -133,32 +133,32 @@ const y = (...e) => {
             "hidden-save": e.hiddenSave,
             "hidden-drop": e.hiddenDrop,
             "hidden-buttons": e.hiddenButtons,
-            "on-create": h,
-            "on-update": k
+            "on-create": e.onCreate,
+            "on-update": e.onUpdate
           }, {
-            item: p(({ item: a, editMode: n, loading: c, isCreate: s, canUpdate: f, canDrop: m }) => [
-              V(t.$slots, "item", {
+            item: p(({ item: a, editMode: n, loading: c, isCreate: f, canUpdate: s, canDrop: m }) => [
+              S(t.$slots, "item", {
                 item: a,
                 loading: c,
                 editMode: n,
-                isCreate: s,
-                canUpdate: f,
+                isCreate: f,
+                canUpdate: s,
                 canDrop: m
               })
             ]),
             _: 3
-          }, 8, ["modelValue", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "hidden-save", "hidden-drop", "hidden-buttons"])
+          }, 8, ["modelValue", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update"])
         ]),
         _: 3
       }, 8, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "before-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
     };
   }
 }), J = {
-  install: (e, C) => {
-    e.component("lkt-modal-crud") === void 0 && e.component("lkt-modal-crud", H);
+  install: (e, b) => {
+    e.component("lkt-modal-crud") === void 0 && e.component("lkt-modal-crud", P);
   }
 };
 export {
-  G as debugLktModalCrud,
+  H as debugLktModalCrud,
   J as default
 };
