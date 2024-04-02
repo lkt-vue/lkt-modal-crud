@@ -1,14 +1,14 @@
-import { defineComponent as T, ref as o, watch as h, computed as F, resolveComponent as k, openBlock as K, createBlock as L, withCtx as p, renderSlot as S, createVNode as $ } from "vue";
-const C = class C {
+import { defineComponent as I, ref as o, watch as h, computed as T, resolveComponent as k, openBlock as K, createBlock as L, withCtx as p, renderSlot as S, createVNode as $ } from "vue";
+const y = class y {
 };
-C.debugEnabled = !1;
-let n = C;
-const y = (...e) => {
-  n.debugEnabled && console.info("[LktModalCrud] ", ...e);
-}, H = (e = !0) => {
-  n.debugEnabled = e;
-}, A = { name: "LktModalCrud", inheritAttrs: !1 }, P = /* @__PURE__ */ T({
-  ...A,
+y.debugEnabled = !1;
+let u = y;
+const b = (...e) => {
+  u.debugEnabled && console.info("[LktModalCrud] ", ...e);
+}, G = (e = !0) => {
+  u.debugEnabled = e;
+}, P = /* @__PURE__ */ I({
+  __name: "LktModalCrud",
   props: {
     modelValue: { type: Object, required: !1, default: () => ({}) },
     palette: { type: String, default: "" },
@@ -48,32 +48,33 @@ const y = (...e) => {
     updateDisabled: { type: Boolean, default: !1 },
     dropDisabled: { type: Boolean, default: !1 },
     saveValidator: { type: Function, required: !1, default: () => !0 },
+    beforeEmitUpdate: { type: Function, required: !1, default: () => !0 },
     beforeClose: { type: Function, default: void 0 },
     onCreate: { type: Function, required: !1, default: () => !0 },
     onUpdate: { type: Function, required: !1, default: () => !0 }
   },
   emits: ["update:modelValue", "read", "create", "update", "drop", "perms"],
-  setup(e, { expose: b, emit: B }) {
-    const l = e, d = B;
-    let V = [];
-    const r = o(l.modelValue), q = o(V), v = o(null), R = o(!1), D = o(!1), g = o(l.isCreate);
-    h(() => l.modelValue, (t) => r.value = t), h(r, (t) => d("update:modelValue", t), { deep: !0 });
-    const x = (t) => R.value = !0, M = (t) => d("read", t), j = (t) => {
-      y("Detected create on Item Crud", t), d("create", t);
+  setup(e, { expose: C, emit: B }) {
+    const r = e, d = B;
+    let q = [];
+    const l = o(r.modelValue), V = o(q), v = o(null), R = o(!1), D = o(!1), g = o(r.isCreate);
+    h(() => r.modelValue, (t) => l.value = t), h(l, (t) => d("update:modelValue", t), { deep: !0 });
+    const x = (t) => R.value = !0, E = (t) => d("read", t), M = (t) => {
+      b("Detected create on Item Crud", t), d("create", t);
+    }, j = (t) => {
+      b("Detected update on Item Crud", t), d("update", t);
     }, z = (t) => {
-      y("Detected update on Item Crud", t), d("update", t);
-    }, O = (t) => {
-      y("Detected drop on Item Crud", t), d("drop", t);
-    }, E = (t) => D.value = t, w = (t) => {
-      q.value = t, d("perms", t);
-    }, N = F(() => D.value ? l.editedCloseConfirm : "");
-    return b({
+      b("Detected drop on Item Crud", t), d("drop", t);
+    }, O = (t) => D.value = t, U = (t) => {
+      V.value = t, d("perms", t);
+    }, w = T(() => D.value ? r.editedCloseConfirm : "");
+    return C({
       doRefresh: () => {
         v.value.doRefresh();
       }
     }), (t, i) => {
-      const U = k("lkt-item-crud"), I = k("lkt-modal");
-      return K(), L(I, {
+      const N = k("lkt-item-crud"), F = k("lkt-modal");
+      return K(), L(F, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -85,34 +86,34 @@ const y = (...e) => {
         "before-close": e.beforeClose,
         "disabled-close": e.disabledClose,
         "disabled-veil-click": e.disabledVeilClick,
-        "close-confirm": N.value,
+        "close-confirm": w.value,
         "close-confirm-key": e.editedCloseConfirmKey
       }, {
-        "pre-title": p(({ item: a, loading: u, editMode: c, isCreate: f, canUpdate: s, canDrop: m }) => [
+        "pre-title": p(({ item: a, loading: n, editMode: f, isCreate: c, canUpdate: s, canDrop: m }) => [
           S(t.$slots, "pre-title", {
             item: a,
-            loading: u,
-            editMode: c,
-            isCreate: f,
+            loading: n,
+            editMode: f,
+            isCreate: c,
             canUpdate: s,
             canDrop: m
           })
         ]),
         default: p(() => [
-          $(U, {
+          $(N, {
             ref: (a) => v.value = a,
-            modelValue: r.value,
-            "onUpdate:modelValue": i[0] || (i[0] = (a) => r.value = a),
+            modelValue: l.value,
+            "onUpdate:modelValue": i[0] || (i[0] = (a) => l.value = a),
             "is-create": g.value,
             "onUpdate:isCreate": i[1] || (i[1] = (a) => g.value = a),
             "create-resource": e.createResource,
-            onPerms: w,
-            onRead: M,
-            onCreate: j,
-            onUpdate: z,
-            onDrop: O,
+            onPerms: U,
+            onRead: E,
+            onCreate: M,
+            onUpdate: j,
+            onDrop: z,
             onError: x,
-            onModifiedData: E,
+            onModifiedData: O,
             "read-resource": e.readResource,
             "read-data": e.readData,
             "drop-confirm": e.dropConfirm,
@@ -130,6 +131,7 @@ const y = (...e) => {
             "create-disabled": e.createDisabled,
             "update-disabled": e.updateDisabled,
             "save-validator": e.saveValidator,
+            "before-emit-update": e.beforeEmitUpdate,
             "hidden-save": e.hiddenSave,
             "hidden-drop": e.hiddenDrop,
             "hidden-buttons": e.hiddenButtons,
@@ -137,29 +139,29 @@ const y = (...e) => {
             "on-update": e.onUpdate,
             "inside-modal": ""
           }, {
-            item: p(({ item: a, editMode: u, loading: c, isCreate: f, canUpdate: s, canDrop: m }) => [
+            item: p(({ item: a, editMode: n, loading: f, isCreate: c, canUpdate: s, canDrop: m }) => [
               S(t.$slots, "item", {
                 item: a,
-                loading: c,
-                editMode: u,
-                isCreate: f,
+                loading: f,
+                editMode: n,
+                isCreate: c,
                 canUpdate: s,
                 canDrop: m
               })
             ]),
             _: 3
-          }, 8, ["modelValue", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update"])
+          }, 8, ["modelValue", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "before-emit-update", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update"])
         ]),
         _: 3
       }, 8, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "before-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
     };
   }
-}), J = {
-  install: (e, b) => {
+}), H = {
+  install: (e, C) => {
     e.component("lkt-modal-crud") === void 0 && e.component("lkt-modal-crud", P);
   }
 };
 export {
-  H as debugLktModalCrud,
-  J as default
+  G as debugLktModalCrud,
+  H as default
 };

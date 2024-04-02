@@ -157,6 +157,11 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         required: false;
         default: () => boolean;
     };
+    beforeEmitUpdate: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => boolean;
+    };
     beforeClose: {
         type: FunctionConstructor;
         default: undefined;
@@ -339,6 +344,11 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         required: false;
         default: () => boolean;
     };
+    beforeEmitUpdate: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => boolean;
+    };
     beforeClose: {
         type: FunctionConstructor;
         default: undefined;
@@ -355,17 +365,15 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     };
 }>> & {
     onDrop?: ((...args: any[]) => any) | undefined;
+    onCreate?: ((...args: any[]) => any) | undefined;
     onUpdate?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onRead?: ((...args: any[]) => any) | undefined;
-    onCreate?: ((...args: any[]) => any) | undefined;
     onPerms?: ((...args: any[]) => any) | undefined;
 }, {
     zIndex: number;
     title: string;
     size: string;
-    onUpdate: Function;
-    onCreate: Function;
     modelValue: Record<string, any>;
     palette: string;
     preTitle: string;
@@ -397,7 +405,10 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     updateDisabled: boolean;
     dropDisabled: boolean;
     saveValidator: Function;
+    beforeEmitUpdate: Function;
     beforeClose: Function;
+    onCreate: Function;
+    onUpdate: Function;
 }, {}>, {
     "pre-title"?(_: {
         item: any;

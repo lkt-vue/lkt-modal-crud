@@ -1,10 +1,5 @@
-<script lang="ts">
-export default {name: 'LktModalCrud', inheritAttrs: false};
-</script>
-
 <script setup lang="ts">
 import {computed, ref, watch} from "vue";
-import {reOpenModal} from "lkt-modal";
 import {debug} from "../functions/debug";
 
 const props = defineProps({
@@ -54,6 +49,7 @@ const props = defineProps({
     dropDisabled: {type: Boolean, default: false},
 
     saveValidator: {type: Function, required: false, default: () => true},
+    beforeEmitUpdate: {type: Function, required: false, default: () => true},
     beforeClose: {type: Function, default: undefined},
 
     onCreate: {type: Function, required: false, default: () => true},
@@ -162,6 +158,7 @@ defineExpose({
             v-bind:create-disabled="createDisabled"
             v-bind:update-disabled="updateDisabled"
             v-bind:save-validator="saveValidator"
+            v-bind:before-emit-update="beforeEmitUpdate"
             v-bind:hidden-save="hiddenSave"
             v-bind:hidden-drop="hiddenDrop"
             v-bind:hidden-buttons="hiddenButtons"
