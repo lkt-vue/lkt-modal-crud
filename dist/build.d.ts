@@ -1,5 +1,5 @@
-declare function G(e?: boolean): void;
-declare namespace H {
-    function install(e: any, C: any): void;
+declare function O(d?: boolean): void;
+declare namespace Q {
+    function install(d: any, v: any): void;
 }
-export { G as debugLktModalCrud, H as default };
+export { O as debugLktModalCrud, Q as default };

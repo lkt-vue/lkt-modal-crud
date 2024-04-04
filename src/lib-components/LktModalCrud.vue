@@ -1,59 +1,104 @@
 <script setup lang="ts">
 import {computed, ref, watch} from "vue";
 import {debug} from "../functions/debug";
+import {LktObject} from "lkt-ts-interfaces";
 
-const props = defineProps({
-    modelValue: {type: Object, required: false, default: () => ({})},
-    palette: {type: String, default: ''},
-    size: {type: String, default: ''},
-    preTitle: {type: String, default: ''},
-    title: {type: String, default: ''},
-    showClose: {type: Boolean, default: true},
-    disabledClose: {type: Boolean, default: false},
-    disabledVeilClick: {type: Boolean, default: false},
-    modalName: {type: String, default: ''},
-    modalKey: {type: [String, Number], default: '_'},
-    zIndex: {type: Number, default: 500},
+const props = withDefaults(defineProps<{
+    // Modal props
+    palette: string
+    size: string
+    preTitle: string
+    showClose: boolean
+    disabledClose: boolean
+    disabledVeilClick: boolean
+    modalName: string
+    modalKey: string
+    zIndex: number
+    editedCloseConfirm: string
+    editedCloseConfirmKey: string|number
+    beforeClose: Function|undefined
 
-    editModeText: {type: String, default: 'Edition Mode'},
-    saveText: {type: String, default: 'Save'},
-    dropText: {type: String, default: 'Delete'},
-    hiddenSave: {type: Boolean, default: false},
-    hiddenDrop: {type: Boolean, default: false},
-    hiddenButtons: {type: Boolean, default: false},
+    // Item CRUD props
+    modelValue: LktObject
+    title: string
+    editModeText: string
+    saveText: string
+    dropText: string
+    hiddenSave: boolean
+    hiddenDrop: boolean
+    hiddenButtons: boolean
+    readResource: string
+    createResource: string
+    updateResource: string
+    dropResource: string
+    readData: LktObject
+    createData: LktObject
+    updateData: LktObject
+    dropData: LktObject
+    isCreate: boolean
+    createConfirm: string
+    updateConfirm: string
+    dropConfirm: string
+    createConfirmData: LktObject
+    updateConfirmData: LktObject
+    dropConfirmData: LktObject
+    createDisabled: boolean
+    updateDisabled: boolean
+    dropDisabled: boolean
+    saveValidator: Function
+    beforeEmitUpdate: Function|undefined
+    onCreate: Function|undefined
+    onUpdate: Function|undefined
+    insideModal: boolean
+    dataStateConfig: LktObject
+}>(), {
+    // Modal props
+    palette: '',
+    size: '',
+    preTitle: '',
+    showClose: true,
+    disabledClose: false,
+    disabledVeilClick: false,
+    modalName: '',
+    modalKey: '_',
+    zIndex: 500,
+    editedCloseConfirm: '',
+    editedCloseConfirmKey: '_',
+    beforeClose: undefined,
 
-    editedCloseConfirm: {type: String, default: ''},
-    editedCloseConfirmKey: {type: [String, Number], default: '_'},
-
-    readResource: {type: String, required: false},
-    createResource: {type: String, required: false},
-    updateResource: {type: String, required: false},
-    dropResource: {type: String, required: false},
-
-    readData: {type: Object, required: false, default: () => ({})},
-    createData: {type: Object, required: false, default: () => ({})},
-    updateData: {type: Object, required: false, default: () => ({})},
-    dropData: {type: Object, required: false, default: () => ({})},
-
-    isCreate: {type: Boolean, default: false},
-    createConfirm: {type: String, default: ''},
-    updateConfirm: {type: String, default: ''},
-    dropConfirm: {type: String, default: ''},
-
-    createConfirmData: {type: Object, default: () => ({})},
-    updateConfirmData: {type: Object, default: () => ({})},
-    dropConfirmData: {type: Object, default: () => ({})},
-
-    createDisabled: {type: Boolean, default: false},
-    updateDisabled: {type: Boolean, default: false},
-    dropDisabled: {type: Boolean, default: false},
-
-    saveValidator: {type: Function, required: false, default: () => true},
-    beforeEmitUpdate: {type: Function, required: false, default: () => true},
-    beforeClose: {type: Function, default: undefined},
-
-    onCreate: {type: Function, required: false, default: () => true},
-    onUpdate: {type: Function, required: false, default: () => true},
+    // Item CRUD props
+    modelValue: () => ({}),
+    title: '',
+    editModeText: 'Edition Mode',
+    saveText: 'Save',
+    dropText: 'Delete',
+    hiddenSave: false,
+    hiddenDrop: false,
+    hiddenButtons: false,
+    readResource: '',
+    createResource: '',
+    updateResource: '',
+    dropResource: '',
+    readData: () => ({}),
+    createData: () => ({}),
+    updateData: () => ({}),
+    dropData: () => ({}),
+    isCreate: false,
+    createConfirm: '',
+    updateConfirm: '',
+    dropConfirm: '',
+    createConfirmData: () => ({}),
+    updateConfirmData: () => ({}),
+    dropConfirmData: () => ({}),
+    createDisabled: false,
+    updateDisabled: false,
+    dropDisabled: false,
+    saveValidator: () => true,
+    beforeEmitUpdate: undefined,
+    onCreate: undefined,
+    onUpdate: undefined,
+    insideModal: false,
+    dataStateConfig: () => ({}),
 });
 
 const emit = defineEmits(['update:modelValue', 'read', 'create', 'update', 'drop', 'perms']);
@@ -164,9 +209,10 @@ defineExpose({
             v-bind:hidden-buttons="hiddenButtons"
             v-bind:on-create="onCreate"
             v-bind:on-update="onUpdate"
+            v-bind:data-state-config="dataStateConfig"
             inside-modal
         >
-            <template v-slot:item="{item, editMode, loading, isCreate, canUpdate, canDrop}">
+            <template v-slot:item="{item, editMode, loading, isCreate, canUpdate, canDrop, itemBeingEdited}">
                 <slot
                     name="item"
                     v-bind:item="item"
@@ -175,6 +221,7 @@ defineExpose({
                     v-bind:is-create="isCreate"
                     v-bind:can-update="canUpdate"
                     v-bind:can-drop="canDrop"
+                    v-bind:item-being-edited="itemBeingEdited"
                 />
             </template>
         </lkt-item-crud>
