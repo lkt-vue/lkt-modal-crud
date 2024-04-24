@@ -44,6 +44,8 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onUpdate: Function | undefined;
     insideModal: boolean;
     dataStateConfig: LktObject;
+    onCreateModalCallbacks: LktObject[];
+    onUpdateModalCallbacks: LktObject[];
 }>, {
     palette: string;
     size: string;
@@ -89,6 +91,8 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onUpdate: undefined;
     insideModal: boolean;
     dataStateConfig: () => {};
+    onCreateModalCallbacks: () => never[];
+    onUpdateModalCallbacks: () => never[];
 }>, {
     doRefresh: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
@@ -143,6 +147,8 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onUpdate: Function | undefined;
     insideModal: boolean;
     dataStateConfig: LktObject;
+    onCreateModalCallbacks: LktObject[];
+    onUpdateModalCallbacks: LktObject[];
 }>, {
     palette: string;
     size: string;
@@ -188,6 +194,8 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onUpdate: undefined;
     insideModal: boolean;
     dataStateConfig: () => {};
+    onCreateModalCallbacks: () => never[];
+    onUpdateModalCallbacks: () => never[];
 }>>> & {
     onDrop?: ((...args: any[]) => any) | undefined;
     onCreate?: ((...args: any[]) => any) | undefined;
@@ -240,6 +248,8 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onUpdate: Function | undefined;
     insideModal: boolean;
     dataStateConfig: LktObject;
+    onCreateModalCallbacks: LktObject[];
+    onUpdateModalCallbacks: LktObject[];
 }, {}>, {
     "pre-title"?(_: {
         item: any;

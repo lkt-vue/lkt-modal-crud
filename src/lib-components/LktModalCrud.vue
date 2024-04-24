@@ -51,6 +51,8 @@ const props = withDefaults(defineProps<{
     onUpdate: Function|undefined
     insideModal: boolean
     dataStateConfig: LktObject
+    onCreateModalCallbacks: LktObject[]
+    onUpdateModalCallbacks: LktObject[]
 }>(), {
     // Modal props
     palette: '',
@@ -99,6 +101,8 @@ const props = withDefaults(defineProps<{
     onUpdate: undefined,
     insideModal: false,
     dataStateConfig: () => ({}),
+    onCreateModalCallbacks: () => [],
+    onUpdateModalCallbacks: () => [],
 });
 
 const emit = defineEmits(['update:modelValue', 'read', 'create', 'update', 'drop', 'perms']);
@@ -210,6 +214,8 @@ defineExpose({
             v-bind:on-create="onCreate"
             v-bind:on-update="onUpdate"
             v-bind:data-state-config="dataStateConfig"
+            v-bind:on-create-modal-callbacks="onCreateModalCallbacks"
+            v-bind:on-update-modal-callbacks="onUpdateModalCallbacks"
             inside-modal
         >
             <template v-slot:item="{item, editMode, loading, isCreate, canUpdate, canDrop, itemBeingEdited}">

@@ -1,4 +1,4 @@
-import { defineComponent as P, ref as o, watch as k, computed as j, resolveComponent as B, openBlock as q, createBlock as A, withCtx as c, renderSlot as V, createVNode as G } from "vue";
+import { defineComponent as P, ref as t, watch as h, computed as j, resolveComponent as B, openBlock as q, createBlock as A, withCtx as c, renderSlot as M, createVNode as G } from "vue";
 const b = class b {
 };
 b.debugEnabled = !1;
@@ -53,28 +53,30 @@ const C = (...d) => {
     onCreate: { type: Function, default: void 0 },
     onUpdate: { type: Function, default: void 0 },
     insideModal: { type: Boolean, default: !1 },
-    dataStateConfig: { default: () => ({}) }
+    dataStateConfig: { default: () => ({}) },
+    onCreateModalCallbacks: { default: () => [] },
+    onUpdateModalCallbacks: { default: () => [] }
   },
   emits: ["update:modelValue", "read", "create", "update", "drop", "perms"],
-  setup(d, { expose: v, emit: R }) {
-    const l = d, t = R;
-    let M = [];
-    const r = o(l.modelValue), E = o(M), D = o(null), z = o(!1), y = o(!1), h = o(l.isCreate);
-    k(() => l.modelValue, (e) => r.value = e), k(r, (e) => t("update:modelValue", e), { deep: !0 });
-    const U = (e) => z.value = !0, g = (e) => t("read", e), w = (e) => {
-      C("Detected create on Item Crud", e), t("create", e);
+  setup(d, { expose: v, emit: V }) {
+    const l = d, o = V;
+    let R = [];
+    const r = t(l.modelValue), U = t(R), D = t(null), E = t(!1), k = t(!1), y = t(l.isCreate);
+    h(() => l.modelValue, (e) => r.value = e), h(r, (e) => o("update:modelValue", e), { deep: !0 });
+    const z = (e) => E.value = !0, g = (e) => o("read", e), w = (e) => {
+      C("Detected create on Item Crud", e), o("create", e);
     }, F = (e) => {
-      C("Detected update on Item Crud", e), t("update", e);
+      C("Detected update on Item Crud", e), o("update", e);
     }, I = (e) => {
-      C("Detected drop on Item Crud", e), t("drop", e);
-    }, T = (e) => y.value = e, K = (e) => {
-      E.value = e, t("perms", e);
-    }, L = j(() => y.value ? l.editedCloseConfirm : "");
+      C("Detected drop on Item Crud", e), o("drop", e);
+    }, T = (e) => k.value = e, K = (e) => {
+      U.value = e, o("perms", e);
+    }, L = j(() => k.value ? l.editedCloseConfirm : "");
     return v({
       doRefresh: () => {
         D.value.doRefresh();
       }
-    }), (e, i) => {
+    }), (e, n) => {
       const S = B("lkt-item-crud"), N = B("lkt-modal");
       return q(), A(N, {
         "pre-title": e.preTitle,
@@ -91,10 +93,10 @@ const C = (...d) => {
         "close-confirm": L.value,
         "close-confirm-key": e.editedCloseConfirmKey
       }, {
-        "pre-title": c(({ item: a, loading: n, editMode: s, isCreate: f, canUpdate: p, canDrop: m }) => [
-          V(e.$slots, "pre-title", {
+        "pre-title": c(({ item: a, loading: i, editMode: s, isCreate: f, canUpdate: p, canDrop: m }) => [
+          M(e.$slots, "pre-title", {
             item: a,
-            loading: n,
+            loading: i,
             editMode: s,
             isCreate: f,
             canUpdate: p,
@@ -105,16 +107,16 @@ const C = (...d) => {
           G(S, {
             ref: (a) => D.value = a,
             modelValue: r.value,
-            "onUpdate:modelValue": i[0] || (i[0] = (a) => r.value = a),
-            "is-create": h.value,
-            "onUpdate:isCreate": i[1] || (i[1] = (a) => h.value = a),
+            "onUpdate:modelValue": n[0] || (n[0] = (a) => r.value = a),
+            "is-create": y.value,
+            "onUpdate:isCreate": n[1] || (n[1] = (a) => y.value = a),
             "create-resource": e.createResource,
             onPerms: K,
             onRead: g,
             onCreate: w,
             onUpdate: F,
             onDrop: I,
-            onError: U,
+            onError: z,
             onModifiedData: T,
             "read-resource": e.readResource,
             "read-data": e.readData,
@@ -140,13 +142,15 @@ const C = (...d) => {
             "on-create": e.onCreate,
             "on-update": e.onUpdate,
             "data-state-config": e.dataStateConfig,
+            "on-create-modal-callbacks": e.onCreateModalCallbacks,
+            "on-update-modal-callbacks": e.onUpdateModalCallbacks,
             "inside-modal": ""
           }, {
-            item: c(({ item: a, editMode: n, loading: s, isCreate: f, canUpdate: p, canDrop: m, itemBeingEdited: $ }) => [
-              V(e.$slots, "item", {
+            item: c(({ item: a, editMode: i, loading: s, isCreate: f, canUpdate: p, canDrop: m, itemBeingEdited: $ }) => [
+              M(e.$slots, "item", {
                 item: a,
                 loading: s,
-                editMode: n,
+                editMode: i,
                 isCreate: f,
                 canUpdate: p,
                 canDrop: m,
@@ -154,7 +158,7 @@ const C = (...d) => {
               })
             ]),
             _: 3
-          }, 8, ["modelValue", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "before-emit-update", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update", "data-state-config"])
+          }, 8, ["modelValue", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "before-emit-update", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update", "data-state-config", "on-create-modal-callbacks", "on-update-modal-callbacks"])
         ]),
         _: 3
       }, 8, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "before-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
