@@ -54,6 +54,7 @@ const props = withDefaults(defineProps<{
     onCreateModalCallbacks: LktObject[]
     onUpdateModalCallbacks: LktObject[]
     onDropModalCallbacks: LktObject[]
+    editing: boolean
 }>(), {
     // Modal props
     palette: '',
@@ -105,9 +106,10 @@ const props = withDefaults(defineProps<{
     onCreateModalCallbacks: () => [],
     onUpdateModalCallbacks: () => [],
     onDropModalCallbacks: () => [],
+    editing: false
 });
 
-const emit = defineEmits(['update:modelValue', 'read', 'create', 'update', 'drop', 'perms']);
+const emit = defineEmits(['update:modelValue', 'update:editing', 'read', 'create', 'update', 'drop', 'perms', 'before-save']);
 
 let _perms:string[] = [];
 const item = ref(props.modelValue),
@@ -115,10 +117,13 @@ const item = ref(props.modelValue),
     crudComponent = ref(null),
     hasErrors = ref(false),
     hasModifiedData = ref(false),
-    createMode = ref(props.isCreate);
+    createMode = ref(props.isCreate),
+    editMode = ref(props.editing);
 
 watch(() => props.modelValue, v => item.value = v);
+watch(() => props.editing, v => editMode.value = v);
 watch(item, (v) => emit('update:modelValue', v), {deep: true});
+watch(editMode, (v) => emit('update:editing', v));
 
 const onReadError = (status: number) => hasErrors.value = true,
     onRead = (r: any) => emit('read', r),
@@ -133,6 +138,10 @@ const onReadError = (status: number) => hasErrors.value = true,
     onDrop = (r: any) => {
         debug('Detected drop on Item Crud', r);
         emit('drop', r)
+    },
+    onBeforeSave = () => {
+        debug('Detected before save on Item Crud');
+        emit('before-save')
     },
     onModifiedData = (v: boolean) => hasModifiedData.value = v,
     onPerms = (p: string[]) => {
@@ -183,6 +192,7 @@ defineExpose({
         <lkt-item-crud
             :ref="(el:any) => crudComponent = el"
             v-model="item"
+            v-model:editing="editMode"
             v-model:is-create="createMode"
             v-bind:create-resource="createResource"
             v-on:perms="onPerms"
@@ -219,6 +229,7 @@ defineExpose({
             v-bind:on-create-modal-callbacks="onCreateModalCallbacks"
             v-bind:on-update-modal-callbacks="onUpdateModalCallbacks"
             v-bind:on-drop-modal-callbacks="onDropModalCallbacks"
+            @before-save="onBeforeSave"
             inside-modal
         >
             <template v-slot:item="{item, editMode, loading, isCreate, canUpdate, canDrop, itemBeingEdited}">

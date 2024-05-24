@@ -1,13 +1,13 @@
-import { defineComponent as P, ref as t, watch as h, computed as j, resolveComponent as M, openBlock as q, createBlock as A, withCtx as c, renderSlot as B, createVNode as G } from "vue";
-const b = class b {
+import { defineComponent as q, ref as t, watch as u, computed as A, resolveComponent as B, openBlock as G, createBlock as H, withCtx as v, renderSlot as g, createVNode as J } from "vue";
+const k = class k {
 };
-b.debugEnabled = !1;
-let u = b;
-const C = (...d) => {
-  u.debugEnabled && console.info("[LktModalCrud] ", ...d);
-}, O = (d = !0) => {
-  u.debugEnabled = d;
-}, H = /* @__PURE__ */ P({
+k.debugEnabled = !1;
+let f = k;
+const s = (...d) => {
+  f.debugEnabled && console.info("[LktModalCrud] ", ...d);
+}, W = (d = !0) => {
+  f.debugEnabled = d;
+}, O = /* @__PURE__ */ q({
   __name: "LktModalCrud",
   props: {
     palette: { default: "" },
@@ -56,30 +56,33 @@ const C = (...d) => {
     dataStateConfig: { default: () => ({}) },
     onCreateModalCallbacks: { default: () => [] },
     onUpdateModalCallbacks: { default: () => [] },
-    onDropModalCallbacks: { default: () => [] }
+    onDropModalCallbacks: { default: () => [] },
+    editing: { type: Boolean, default: !1 }
   },
-  emits: ["update:modelValue", "read", "create", "update", "drop", "perms"],
-  setup(d, { expose: k, emit: V }) {
+  emits: ["update:modelValue", "update:editing", "read", "create", "update", "drop", "perms", "before-save"],
+  setup(d, { expose: D, emit: V }) {
     const l = d, o = V;
     let R = [];
-    const r = t(l.modelValue), U = t(R), v = t(null), E = t(!1), D = t(!1), y = t(l.isCreate);
-    h(() => l.modelValue, (e) => r.value = e), h(r, (e) => o("update:modelValue", e), { deep: !0 });
-    const z = (e) => E.value = !0, g = (e) => o("read", e), w = (e) => {
-      C("Detected create on Item Crud", e), o("create", e);
+    const i = t(l.modelValue), U = t(R), y = t(null), E = t(!1), M = t(!1), h = t(l.isCreate), n = t(l.editing);
+    u(() => l.modelValue, (e) => i.value = e), u(() => l.editing, (e) => n.value = e), u(i, (e) => o("update:modelValue", e), { deep: !0 }), u(n, (e) => o("update:editing", e));
+    const z = (e) => E.value = !0, w = (e) => o("read", e), I = (e) => {
+      s("Detected create on Item Crud", e), o("create", e);
     }, F = (e) => {
-      C("Detected update on Item Crud", e), o("update", e);
-    }, I = (e) => {
-      C("Detected drop on Item Crud", e), o("drop", e);
-    }, T = (e) => D.value = e, K = (e) => {
+      s("Detected update on Item Crud", e), o("update", e);
+    }, S = (e) => {
+      s("Detected drop on Item Crud", e), o("drop", e);
+    }, T = () => {
+      s("Detected before save on Item Crud"), o("before-save");
+    }, K = (e) => M.value = e, L = (e) => {
       U.value = e, o("perms", e);
-    }, L = j(() => D.value ? l.editedCloseConfirm : "");
-    return k({
+    }, N = A(() => M.value ? l.editedCloseConfirm : "");
+    return D({
       doRefresh: () => {
-        v.value.doRefresh();
+        y.value.doRefresh();
       }
-    }), (e, n) => {
-      const S = M("lkt-item-crud"), N = M("lkt-modal");
-      return q(), A(N, {
+    }), (e, r) => {
+      const $ = B("lkt-item-crud"), P = B("lkt-modal");
+      return G(), H(P, {
         "pre-title": e.preTitle,
         title: e.title,
         "modal-name": e.modalName,
@@ -91,34 +94,36 @@ const C = (...d) => {
         "before-close": e.beforeClose,
         "disabled-close": e.disabledClose,
         "disabled-veil-click": e.disabledVeilClick,
-        "close-confirm": L.value,
+        "close-confirm": N.value,
         "close-confirm-key": e.editedCloseConfirmKey
       }, {
-        "pre-title": c(({ item: a, loading: i, editMode: s, isCreate: p, canUpdate: f, canDrop: m }) => [
-          B(e.$slots, "pre-title", {
+        "pre-title": v(({ item: a, loading: p, editMode: m, isCreate: c, canUpdate: C, canDrop: b }) => [
+          g(e.$slots, "pre-title", {
             item: a,
-            loading: i,
-            editMode: s,
-            isCreate: p,
-            canUpdate: f,
-            canDrop: m
+            loading: p,
+            editMode: m,
+            isCreate: c,
+            canUpdate: C,
+            canDrop: b
           })
         ]),
-        default: c(() => [
-          G(S, {
-            ref: (a) => v.value = a,
-            modelValue: r.value,
-            "onUpdate:modelValue": n[0] || (n[0] = (a) => r.value = a),
-            "is-create": y.value,
-            "onUpdate:isCreate": n[1] || (n[1] = (a) => y.value = a),
+        default: v(() => [
+          J($, {
+            ref: (a) => y.value = a,
+            modelValue: i.value,
+            "onUpdate:modelValue": r[0] || (r[0] = (a) => i.value = a),
+            editing: n.value,
+            "onUpdate:editing": r[1] || (r[1] = (a) => n.value = a),
+            "is-create": h.value,
+            "onUpdate:isCreate": r[2] || (r[2] = (a) => h.value = a),
             "create-resource": e.createResource,
-            onPerms: K,
-            onRead: g,
-            onCreate: w,
+            onPerms: L,
+            onRead: w,
+            onCreate: I,
             onUpdate: F,
-            onDrop: I,
+            onDrop: S,
             onError: z,
-            onModifiedData: T,
+            onModifiedData: K,
             "read-resource": e.readResource,
             "read-data": e.readData,
             "drop-confirm": e.dropConfirm,
@@ -146,32 +151,33 @@ const C = (...d) => {
             "on-create-modal-callbacks": e.onCreateModalCallbacks,
             "on-update-modal-callbacks": e.onUpdateModalCallbacks,
             "on-drop-modal-callbacks": e.onDropModalCallbacks,
+            onBeforeSave: T,
             "inside-modal": ""
           }, {
-            item: c(({ item: a, editMode: i, loading: s, isCreate: p, canUpdate: f, canDrop: m, itemBeingEdited: $ }) => [
-              B(e.$slots, "item", {
+            item: v(({ item: a, editMode: p, loading: m, isCreate: c, canUpdate: C, canDrop: b, itemBeingEdited: j }) => [
+              g(e.$slots, "item", {
                 item: a,
-                loading: s,
-                editMode: i,
-                isCreate: p,
-                canUpdate: f,
-                canDrop: m,
-                itemBeingEdited: $
+                loading: m,
+                editMode: p,
+                isCreate: c,
+                canUpdate: C,
+                canDrop: b,
+                itemBeingEdited: j
               })
             ]),
             _: 3
-          }, 8, ["modelValue", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "before-emit-update", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update", "data-state-config", "on-create-modal-callbacks", "on-update-modal-callbacks", "on-drop-modal-callbacks"])
+          }, 8, ["modelValue", "editing", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "before-emit-update", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update", "data-state-config", "on-create-modal-callbacks", "on-update-modal-callbacks", "on-drop-modal-callbacks"])
         ]),
         _: 3
       }, 8, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "before-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);
     };
   }
-}), Q = {
-  install: (d, k) => {
-    d.component("lkt-modal-crud") === void 0 && d.component("lkt-modal-crud", H);
+}), X = {
+  install: (d, D) => {
+    d.component("lkt-modal-crud") === void 0 && d.component("lkt-modal-crud", O);
   }
 };
 export {
-  O as debugLktModalCrud,
-  Q as default
+  W as debugLktModalCrud,
+  X as default
 };

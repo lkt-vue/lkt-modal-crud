@@ -47,6 +47,7 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onCreateModalCallbacks: LktObject[];
     onUpdateModalCallbacks: LktObject[];
     onDropModalCallbacks: LktObject[];
+    editing: boolean;
 }>, {
     palette: string;
     size: string;
@@ -95,15 +96,18 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onCreateModalCallbacks: () => never[];
     onUpdateModalCallbacks: () => never[];
     onDropModalCallbacks: () => never[];
+    editing: boolean;
 }>, {
     doRefresh: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     drop: (...args: any[]) => void;
     update: (...args: any[]) => void;
     "update:modelValue": (...args: any[]) => void;
+    "update:editing": (...args: any[]) => void;
     read: (...args: any[]) => void;
     create: (...args: any[]) => void;
     perms: (...args: any[]) => void;
+    "before-save": (...args: any[]) => void;
 }, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
     palette: string;
     size: string;
@@ -152,6 +156,7 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onCreateModalCallbacks: LktObject[];
     onUpdateModalCallbacks: LktObject[];
     onDropModalCallbacks: LktObject[];
+    editing: boolean;
 }>, {
     palette: string;
     size: string;
@@ -200,13 +205,16 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onCreateModalCallbacks: () => never[];
     onUpdateModalCallbacks: () => never[];
     onDropModalCallbacks: () => never[];
+    editing: boolean;
 }>>> & {
     onDrop?: ((...args: any[]) => any) | undefined;
     onCreate?: ((...args: any[]) => any) | undefined;
     onUpdate?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    "onUpdate:editing"?: ((...args: any[]) => any) | undefined;
     onRead?: ((...args: any[]) => any) | undefined;
     onPerms?: ((...args: any[]) => any) | undefined;
+    "onBefore-save"?: ((...args: any[]) => any) | undefined;
 }, {
     zIndex: number;
     title: string;
@@ -255,6 +263,7 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     onCreateModalCallbacks: LktObject[];
     onUpdateModalCallbacks: LktObject[];
     onDropModalCallbacks: LktObject[];
+    editing: boolean;
 }, {}>, {
     "pre-title"?(_: {
         item: any;

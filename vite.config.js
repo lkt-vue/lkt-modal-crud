@@ -24,6 +24,7 @@ export default {
       external: [
         'vue',
         'lkt-modal',
+        'lkt-i18n',
         'lkt-item-crud',
         'lkt-events',
         'lkt-http-client',
