@@ -2,11 +2,11 @@ import { defineComponent as q, ref as t, watch as u, computed as A, resolveCompo
 const k = class k {
 };
 k.debugEnabled = !1;
-let f = k;
+let p = k;
 const s = (...d) => {
-  f.debugEnabled && console.info("[LktModalCrud] ", ...d);
+  p.debugEnabled && console.info("[LktModalCrud] ", ...d);
 }, W = (d = !0) => {
-  f.debugEnabled = d;
+  p.debugEnabled = d;
 }, O = /* @__PURE__ */ q({
   __name: "LktModalCrud",
   props: {
@@ -26,7 +26,9 @@ const s = (...d) => {
     title: { default: "" },
     editModeText: { default: "Edition Mode" },
     saveText: { default: "Save" },
+    saveIcon: {},
     dropText: { default: "Delete" },
+    dropIcon: {},
     hiddenSave: { type: Boolean, default: !1 },
     hiddenDrop: { type: Boolean, default: !1 },
     hiddenButtons: { type: Boolean, default: !1 },
@@ -63,9 +65,9 @@ const s = (...d) => {
   setup(d, { expose: D, emit: V }) {
     const l = d, o = V;
     let R = [];
-    const i = t(l.modelValue), U = t(R), y = t(null), E = t(!1), M = t(!1), h = t(l.isCreate), n = t(l.editing);
+    const i = t(l.modelValue), U = t(R), y = t(null), I = t(!1), M = t(!1), h = t(l.isCreate), n = t(l.editing);
     u(() => l.modelValue, (e) => i.value = e), u(() => l.editing, (e) => n.value = e), u(i, (e) => o("update:modelValue", e), { deep: !0 }), u(n, (e) => o("update:editing", e));
-    const z = (e) => E.value = !0, w = (e) => o("read", e), I = (e) => {
+    const E = (e) => I.value = !0, z = (e) => o("read", e), w = (e) => {
       s("Detected create on Item Crud", e), o("create", e);
     }, F = (e) => {
       s("Detected update on Item Crud", e), o("update", e);
@@ -97,10 +99,10 @@ const s = (...d) => {
         "close-confirm": N.value,
         "close-confirm-key": e.editedCloseConfirmKey
       }, {
-        "pre-title": v(({ item: a, loading: p, editMode: m, isCreate: c, canUpdate: C, canDrop: b }) => [
+        "pre-title": v(({ item: a, loading: f, editMode: m, isCreate: c, canUpdate: C, canDrop: b }) => [
           g(e.$slots, "pre-title", {
             item: a,
-            loading: p,
+            loading: f,
             editMode: m,
             isCreate: c,
             canUpdate: C,
@@ -118,12 +120,14 @@ const s = (...d) => {
             "onUpdate:isCreate": r[2] || (r[2] = (a) => h.value = a),
             "create-resource": e.createResource,
             onPerms: L,
-            onRead: w,
-            onCreate: I,
+            onRead: z,
+            onCreate: w,
             onUpdate: F,
             onDrop: S,
-            onError: z,
+            onError: E,
             onModifiedData: K,
+            "drop-icon": e.dropIcon,
+            "save-icon": e.saveIcon,
             "read-resource": e.readResource,
             "read-data": e.readData,
             "drop-confirm": e.dropConfirm,
@@ -154,11 +158,11 @@ const s = (...d) => {
             onBeforeSave: T,
             "inside-modal": ""
           }, {
-            item: v(({ item: a, editMode: p, loading: m, isCreate: c, canUpdate: C, canDrop: b, itemBeingEdited: j }) => [
+            item: v(({ item: a, editMode: f, loading: m, isCreate: c, canUpdate: C, canDrop: b, itemBeingEdited: j }) => [
               g(e.$slots, "item", {
                 item: a,
                 loading: m,
-                editMode: p,
+                editMode: f,
                 isCreate: c,
                 canUpdate: C,
                 canDrop: b,
@@ -166,7 +170,7 @@ const s = (...d) => {
               })
             ]),
             _: 3
-          }, 8, ["modelValue", "editing", "is-create", "create-resource", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "before-emit-update", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update", "data-state-config", "on-create-modal-callbacks", "on-update-modal-callbacks", "on-drop-modal-callbacks"])
+          }, 8, ["modelValue", "editing", "is-create", "create-resource", "drop-icon", "save-icon", "read-resource", "read-data", "drop-confirm", "drop-confirm-data", "drop-resource", "drop-data", "update-confirm", "update-confirm-data", "update-resource", "update-data", "drop-disabled", "create-confirm", "create-confirm-data", "create-data", "create-disabled", "update-disabled", "save-validator", "before-emit-update", "hidden-save", "hidden-drop", "hidden-buttons", "on-create", "on-update", "data-state-config", "on-create-modal-callbacks", "on-update-modal-callbacks", "on-drop-modal-callbacks"])
         ]),
         _: 3
       }, 8, ["pre-title", "title", "modal-name", "modal-key", "z-index", "palette", "size", "show-close", "before-close", "disabled-close", "disabled-veil-click", "close-confirm", "close-confirm-key"]);

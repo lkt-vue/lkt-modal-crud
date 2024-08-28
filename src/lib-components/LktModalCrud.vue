@@ -23,7 +23,9 @@ const props = withDefaults(defineProps<{
     title: string
     editModeText: string
     saveText: string
+    saveIcon: string
     dropText: string
+    dropIcon: string
     hiddenSave: boolean
     hiddenDrop: boolean
     hiddenButtons: boolean
@@ -202,6 +204,8 @@ defineExpose({
             v-on:drop="onDrop"
             v-on:error="onReadError"
             v-on:modified-data="onModifiedData"
+            :drop-icon="dropIcon"
+            :save-icon="saveIcon"
             v-bind:read-resource="readResource"
             v-bind:read-data="readData"
             v-bind:drop-confirm="dropConfirm"
